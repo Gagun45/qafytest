@@ -1,3 +1,4 @@
+import { SessionProvider } from "next-auth/react";
 import NavLink from "./NavLink/NavLink";
 import Signin from "./Signin/Signin";
 
@@ -18,7 +19,9 @@ export default function Navbar() {
       {LINKS.map((link) => (
         <NavLink key={link.path} link={link} />
       ))}
-      <Signin />
+      <SessionProvider>
+        <Signin />
+      </SessionProvider>
     </div>
   );
 }

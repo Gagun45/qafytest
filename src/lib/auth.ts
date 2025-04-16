@@ -13,9 +13,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         await connectToDb();
         const existingUser = await User.findOne({ email: user.email });
         if (!existingUser) {
+          const password = crypto.randomUUID().slice(0, 8).toUpperCase();
           await User.create({
             email: user.email,
-            isAdmin: false,
+            isAdmin: true,
+            password,
           });
         }
         return true;
@@ -30,8 +32,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       const filteredSession = {
         ...session,
         user: {
-          email: dbUser.email,
-          isAdmin: dbUser.isAdmin,
+          email: dbUser!.email,
+          isAdmin: dbUser!.isAdmin,
         },
       };
       return filteredSession;

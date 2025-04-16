@@ -3,5 +3,9 @@
 import { signIn } from "next-auth/react";
 
 export default function Login() {
-  return <button onClick={() => signIn("google")}>Login</button>;
+  return (
+    <button className="navLink logBtn" onClick={() => signIn("google", { callbackUrl: "/" })}>
+      Login via Google
+    </button>
+  );
 }

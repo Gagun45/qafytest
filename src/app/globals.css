@@ -18,6 +18,14 @@
     @apply px-2 sm:px-4 md:px-8 lg:px-12
   }
 
+  .navLink {
+    @apply cursor-pointer p-2 h-10 flex items-center justify-center;
+  }
+
+  .logBtn {
+    @apply w-24 bg-third hover:bg-main;
+  }
+
   .header {
     @apply h-[var(--headH)]
   }
