@@ -13,9 +13,7 @@ export default function NavLink({ link }: { link: LinkInterface }) {
     <Link
       key={link.path}
       href={link.path}
-      className={`${currentPage && "bg-main"} ${
-        !currentPage && "hover:bg-third"
-      } navLink`}
+      className={`${currentPage && "bg-main"} navLink`}
     >
       {link.title}
     </Link>

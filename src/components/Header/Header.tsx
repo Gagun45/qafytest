@@ -3,9 +3,9 @@ import Navbar from "./Navbar/Navbar";
 
 export default function Header() {
   return (
-    <div className="header resPadding bg-headfoot flex justify-between">
+    <header className="resPadding flex justify-between">
       <Logo />
       <Navbar />
-    </div>
+    </header>
   );
 }
