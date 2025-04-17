@@ -5,12 +5,14 @@
     gap: 30px;
     width: 100%;
 }
+
 .form input {
     padding: 20px;
     color: var(--textColor);
     border: 1px solid;
     border-radius: 5px;
     width: 100%;
+    outline: none;
 }
 
 .button {
@@ -21,4 +23,9 @@
     font-weight: bold;
     border: none;
     border-radius: 5px;
+}
+
+.button:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
 }

@@ -10,7 +10,6 @@ declare module "next-auth" {
 
   interface User extends AdapterUser {
     email: string;
-    isAdmin: string;
-    password: string;
+    isAdmin: boolean;
   }
 }

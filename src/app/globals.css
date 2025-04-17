@@ -9,7 +9,7 @@
 
 @layer base {
   main {
-    @apply w-[100vw] p-2 sm:p-4 md:p-8 lg:p-12 min-h-[calc(100vh-var(--headH)-var(--footH))] bg-main
+    @apply w-[100vw] p-4 md:p-8 lg:p-12 min-h-[calc(100vh-var(--headH)-var(--footH))] bg-main
   }
 
   header {
