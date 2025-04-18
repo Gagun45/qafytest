@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import SessionWrapper from "./SessionWrapper";
+import { ThemeProvider } from "./ThemeContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,15 +27,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
       >
-        <SessionWrapper>
-          <Header />
-          {children}
-          <Footer />
-        </SessionWrapper>
+        <ThemeProvider>
+          <SessionWrapper>
+            <Header />
+            {children}
+            <Footer />
+          </SessionWrapper>
+        </ThemeProvider>
       </body>
     </html>
   );

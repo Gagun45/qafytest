@@ -5,7 +5,21 @@
   --color-main: #B9B28A;
   --color-third: #EBE5C2;
   --color-fourth: #504B38;
+  --color-anti: ;
+  --color-disabled: #EBE5C244
+
 }
+
+[data-theme='light'] {
+  --color-main: white;
+  --color-anti: black;
+}
+
+[data-theme='dark'] {
+  --color-main: black;
+  --color-anti: white;
+}
+
 
 @layer base {
   main {
