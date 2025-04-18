@@ -7,7 +7,10 @@
   --color-fourth: #504B38;
   --color-anti: ;
   --color-disabled: #EBE5C244
+}
 
+:root {
+  --mainH: calc(100vh - var(--headH) - var(--footH));
 }
 
 [data-theme='light'] {
@@ -23,7 +26,7 @@
 
 @layer base {
   main {
-    @apply w-[100vw] p-4 md:p-8 lg:p-12 min-h-[calc(100vh-var(--headH)-var(--footH))] bg-main
+    @apply w-[100vw] p-4 md:p-8 lg:p-12 min-h-[var(--mainH)] bg-main
   }
 
   header {

@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Logo() {
   return (
-    <div className="flex items-center justify-center h-full w-1/2">
-      <Image src="/qafyLogo.png" width={50} height={50} alt=""/>
-    </div>
+    <Link href="/">
+      <Image src="/qafyLogo.png" width={50} height={50} alt="" />
+    </Link>
   );
 }

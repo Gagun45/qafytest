@@ -1,4 +1,3 @@
-import Theme from "../Theme/Theme";
 import NavLink from "./NavLink/NavLink";
 import Signin from "./Signin/Signin";
 
@@ -15,8 +14,7 @@ const LINKS: LinkInterface[] = [
 
 export default function Navbar() {
   return (
-    <div className="hidden sm:flex items-center gap-2 justify-center h-full w-1/2">
-      <Theme />
+    <div className="hidden sm:flex items-center gap-2 justify-end h-full w-full ">
       {LINKS.map((link) => (
         <NavLink key={link.path} link={link} />
       ))}
