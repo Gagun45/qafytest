@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "@/app/ThemeContext";
+import { useTheme } from "@/app/[locale]/ThemeContext";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
