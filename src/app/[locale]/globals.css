@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-headfoot: #F8F3D9;
-  --color-main: #B9B28A;
-  --color-third: #EBE5C2;
+  --color-headfoot: #000814;
+  --color-main: ;
+  --color-third: #222;
   --color-fourth: #504B38;
   --color-anti: ;
-  --color-disabled: #EBE5C244
+  --color-disabled: ;
+  --color-text: ;
 }
 
 :root {
@@ -15,12 +16,13 @@
 
 [data-theme='light'] {
   --color-main: white;
-  --color-anti: black;
+  --color-anti: yellow
 }
 
 [data-theme='dark'] {
-  --color-main: black;
-  --color-anti: white;
+  --color-headfoot: #353535;
+  --color-main: #080708;
+  --color-text: white;
 }
 
 
@@ -30,11 +32,11 @@
   }
 
   header {
-    @apply w-full bg-headfoot h-[var(--headH)]
+    @apply w-[100vw] bg-headfoot h-[var(--headH)]
   }
 
   footer {
-    @apply w-full bg-headfoot h-[var(--footH)]
+    @apply w-[100vw] bg-headfoot h-[var(--footH)]
   }
 }
 
@@ -44,7 +46,7 @@
   }
 
   .navLink {
-    @apply cursor-pointer p-2 h-12 flex items-center justify-center w-24 hover:bg-third;
+    @apply rounded-full cursor-pointer p-2 h-9 flex items-center justify-center w-24 hover:bg-main;
   }
 }
 

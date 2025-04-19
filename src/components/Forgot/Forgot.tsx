@@ -3,20 +3,24 @@
 import { useEffect, useState } from "react";
 import styles from "./Forgot.module.css";
 import { forgotPassword } from "@/lib/actions";
-import Link from "next/link";
+import Fgsuccess from "./Fgsuccess";
 
 export default function Forgot() {
   const [email, setEmail] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
   const [status, setStatus] = useState("");
   const [isSend, setIsSend] = useState(false);
+  const [isPending, setIsPending] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
+    setIsPending(true);
     e.preventDefault();
+    setStatus("");
     const res = await forgotPassword(email);
     if (res === "Success") {
       setIsSend(true);
     } else setStatus(res);
+    setIsPending(false);
   };
 
   useEffect(() => {
@@ -24,13 +28,10 @@ export default function Forgot() {
     else setIsDisabled(true);
   }, [email]);
 
-  if (isSend)
-    return (
-      <div>
-        Reset link successfulyl sent to {email}
-        <Link href="/login">Login</Link>
-      </div>
-    );
+  if (isSend) {
+    return <Fgsuccess email={email} />;
+  }
+  
   return (
     <div className="w-full max-w-[325px] flex flex-col gap-[30px]">
       <h1 className="text-center font-bold text-2xl">Forgot password</h1>
@@ -42,8 +43,8 @@ export default function Forgot() {
           placeholder="email"
           name="email"
         />
-        <button disabled={isDisabled} className={styles.button}>
-          Send reset link to email
+        <button disabled={isDisabled || isPending} className={styles.button}>
+          {isPending ? "Processing..." : "Send reset link to email"}
         </button>
         <span>{status}</span>
       </form>

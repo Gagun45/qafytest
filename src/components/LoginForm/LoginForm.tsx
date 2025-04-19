@@ -4,32 +4,44 @@ import styles from "./LoginForm.module.css";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { login } from "@/lib/actions";
+import { useRouter } from "@/i18n/navigation";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const router = useRouter();
+
   const [isDisabled, setIsDisabled] = useState(true);
   const { update } = useSession();
 
+  const router = useRouter();
+
   useEffect(() => {
+    setError('')
     if (!email || !password || password.length < 8) {
       setIsDisabled(true);
     } else setIsDisabled(false);
   }, [email, password]);
 
   const handleSubmit = async (e: React.FormEvent) => {
+    setError("");
     e.preventDefault();
-    const result = await login(email, password);
-    if (result.error) {
-      setError(result.error);
-    }
-    if (result.success) {
-      router.push("/");
-      await update();
+    try {
+      const result = await login(email, password);
+      if (result.error) {
+        if (result.error === "Wrong password") setPassword("");
+        setError(result.error);
+      }
+      if (result.success) {
+        router.push("/");
+        await update();
+      }
+    } catch {
+      setEmail("");
+      setPassword("");
+      setError("Something went wrong");
+      setIsDisabled(false);
     }
   };
 
@@ -57,12 +69,12 @@ export default function LoginForm() {
         </button>
         <div>
           {"Dont have an account? "}
-          <Link href="/register">
+          <Link href="/register" className="underline underline-offset-2">
             <b>Register</b>
           </Link>
         </div>
         <div>
-          <Link href="/forgot-password">
+          <Link href="/forgot-password" className="underline underline-offset-2">
             <b>Forgot password?</b>
           </Link>
         </div>

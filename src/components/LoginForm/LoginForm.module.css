@@ -8,7 +8,6 @@
 
 .form input {
     padding: 20px;
-    color: var(--textColor);
     border: 1px solid;
     border-radius: 5px;
     width: 100%;
@@ -17,15 +16,19 @@
 
 .button {
     width: 100%;
-    background-color: var(--color-third);
+    background-color: var(--color-headfoot);
     padding: 20px;
     cursor: pointer;
     font-weight: bold;
-    border: none;
     border-radius: 5px;
+}
+
+.button:hover {
+    outline: 1px solid var(--color-text);
 }
 
 .button:disabled {
     cursor: not-allowed;
-    background-color: var(--color-disabled)
+    outline: 1px solid var(--color-text);
+    background-color: var(--color-main);
 }

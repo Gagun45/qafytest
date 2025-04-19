@@ -11,13 +11,19 @@ export default function RegisterForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [error, setError] = useState("");
+
+  const [passwordError, setPasswordError] = useState("");
+
   const [response, setResponse] = useState("");
-  const router = useRouter();
+
+  const [emailIsTaken, setEmailIsTaken] = useState("");
+
+  const [isPending, setIsPending] = useState(false);
 
   const [isDisabled, setIsDisabled] = useState(true);
 
-  useEffect(() => {
+  const router = useRouter();
+  const passwordValidation = () => {
     if (password.length > 24) {
       setPassword(password.slice(0, 25));
     }
@@ -26,39 +32,60 @@ export default function RegisterForm() {
       setPasswordConfirm(passwordConfirm.slice(0, 25));
     }
     if (password === passwordConfirm) {
-      setError("");
+      setPasswordError("");
       setIsDisabled(false);
     }
     if (password && passwordConfirm && password !== passwordConfirm) {
-      setError("Passwords dont match");
+      setPasswordError("Passwords dont match");
       setIsDisabled(true);
     }
     if (!password || !passwordConfirm) {
-      setError("");
+      setPasswordError("");
       setIsDisabled(true);
     }
     if (password && password.length < 8) {
-      setError("Password must be at least 8 symbols long");
+      setPasswordError("Password must be at least 8 symbols long");
       setIsDisabled(true);
     }
+  };
+
+  useEffect(() => {
+    passwordValidation();
   }, [password, passwordConfirm]);
+  useEffect(() => {
+    setEmailIsTaken("");
+  }, [email]);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password !== passwordConfirm) return;
-    const result = await register(email, password);
-    if (result.error) {
-      if (result.error === "Email already taken") {
-        setEmail("");
-        setPassword("");
-        setPasswordConfirm("");
-        setResponse(`Email ${email} already taken`);
-      } else {
-        setResponse(result.error);
+    try {
+      setIsPending(true);
+      setEmailIsTaken("");
+      setPasswordError("");
+      e.preventDefault();
+      if (password !== passwordConfirm) return;
+      const result = await register(email, password);
+      if (result.error) {
+        if (result.error === "Email already taken") {
+          setPassword("");
+          setPasswordConfirm("");
+          setEmailIsTaken(`Email ${email} already taken`);
+        } else {
+          setResponse(result.error);
+        }
       }
-    }
-    if (result.success) {
-      router.push("/login");
+      if (result.success) {
+        router.push("/login");
+      }
+      setIsPending(false);
+    } catch {
+      setIsPending(false);
+      setEmailIsTaken("");
+      setEmail("");
+      setPassword("");
+      setPasswordConfirm("");
+      setPasswordError("");
+      setIsDisabled(true);
+      setResponse("Something went wrong");
     }
   };
 
@@ -87,19 +114,21 @@ export default function RegisterForm() {
           placeholder="password repeat"
           name="passwordConfirm"
         />
-        <span>{error}</span>
-        <span>{response}</span>
-        <button disabled={isDisabled} className={styles.button}>
-          Register
+        {emailIsTaken && <span>{emailIsTaken}</span>}
+        {passwordError && <span>{passwordError}</span>}
+        {response && <span>{response}</span>}
+        <button disabled={isDisabled || isPending} className={styles.button}>
+          {isPending ? "Processing..." : "Register"}
         </button>
         <div>
           {"Already have an account? "}
-          <Link href="/login">
+          <Link href="/login" className="underline underline-offset-2">
             <b>Login</b>
           </Link>
         </div>
       </form>
       <button
+        disabled={isPending}
         className={styles.button}
         onClick={() => signIn("google", { callbackUrl: "/" })}
       >

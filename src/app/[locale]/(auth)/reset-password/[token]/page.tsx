@@ -26,7 +26,9 @@ export default async function ResetPage({ params }: Props) {
 
   return (
     <main>
-      <Reset email={user.email} />
+      <div className="w-full h-full flex justify-center pt-6 items-center">
+        <Reset email={user.email} />
+      </div>
     </main>
   );
 }
