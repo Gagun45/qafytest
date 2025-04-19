@@ -61,6 +61,11 @@ export default function LoginForm() {
             <b>Register</b>
           </Link>
         </div>
+        <div>
+          <Link href="/forgot-password">
+            <b>Forgot password?</b>
+          </Link>
+        </div>
       </form>
       <button
         className={styles.button}

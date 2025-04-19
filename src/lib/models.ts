@@ -10,13 +10,21 @@ const userSchema = new mongoose.Schema(
     isAdmin: {
       type: Boolean,
       required: true,
-      default: false
+      default: false,
     },
     password: {
       type: String,
       required: true,
       min: 8,
       max: 24,
+    },
+    resetPasswordToken: {
+      type: String,
+      default: null,
+    },
+    resetPasswordTokenExpiry: {
+      type: Date,
+      default: null,
     },
   },
   { timestamps: true }
