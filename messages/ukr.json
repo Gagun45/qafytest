@@ -1,8 +1,12 @@
 {
     "HomePage": {
         "title": "Український тітле"
-    }, 
-    "LocaleLayout": {
-        "title": "next-intl УКРАЇНСЬКОЮ"
+    },
+    "NavBarLinks": {
+        "Home": "Головна",
+        "About": "Про нас",
+        "Contact": "Контакти",
+        "Login": "Увійти",
+        "Logout": "Вийти"
     }
 }

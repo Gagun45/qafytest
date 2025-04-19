@@ -1,0 +1,12 @@
+{
+    "HomePage": {
+        "title": "deus тітле"
+    },
+    "NavBarLinks": {
+        "Home": "deus Головна",
+        "About": "deus Про нас",
+        "Contact": "deus Контакти",
+        "Login": "deus Увійти",
+        "Logout": "deus Вийти"
+    }
+}

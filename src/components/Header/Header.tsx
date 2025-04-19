@@ -1,3 +1,4 @@
+import LocaleSwitcher from "../LocaleSwitcher/LocaleSwitcher";
 import Logo from "./Logo/Logo";
 import MobileNavbar from "./MobileNavbar/MobileNavbar";
 import Navbar from "./Navbar/Navbar";
@@ -14,6 +15,7 @@ export default function Header() {
         <div className="hidden sm:flex h-full w-1/2 items-center justify-center">
           <Theme />
         </div>
+        <LocaleSwitcher />
       </div>
       <div className="flex w-1/3 sm:w-1/2  h-full items-center">
         <Navbar />
