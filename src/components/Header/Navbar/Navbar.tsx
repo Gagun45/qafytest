@@ -15,7 +15,7 @@ export default function Navbar() {
     { title: t("Contact"), path: "/contact" },
   ];
   return (
-    <div className="hidden sm:flex items-center gap-2 justify-end h-full w-full ">
+    <div className="hidden sm:flex items-center gap-2 h-full">
       {LINKS.map((link) => (
         <NavLink key={link.path} link={link} />
       ))}

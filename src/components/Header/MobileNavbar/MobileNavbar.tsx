@@ -1,12 +1,11 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHamburger } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import type { LinkInterface } from "../Navbar/Navbar";
 import MobileLink from "./MobileLink";
 import { signOut, useSession } from "next-auth/react";
 import Theme from "../Theme/Theme";
+import LocaleSwitcherPhone from "@/components/LocaleSwitcher/LocaleSwitcherPhone";
 
 const LINKS: LinkInterface[] = [
   { title: "Home", path: "/" },
@@ -19,14 +18,17 @@ export default function MobileNavbar() {
   const { data: session } = useSession();
 
   return (
-    <div className="flex sm:hidden items-center gap-2 justify-end h-full w-full">
-      <FontAwesomeIcon
+    <div className="flex md:hidden items-center">
+      <div
+        className="flex flex-col h-6 gap-1.5 cursor-pointer z-10"
         onClick={() => setOpen((prev) => !prev)}
-        icon={faHamburger}
-        className="z-10"
-      />
+      >
+        <div className="h-1 bg-text w-10 rounded-full"></div>
+        <div className="h-1 bg-text w-10 rounded-full"></div>
+        <div className="h-1 bg-text w-10 rounded-full"></div>
+      </div>
       {open && (
-        <div className="w-[100vw] h-[100vh] absolute top-0 left-0 bg-amber-950 flex flex-col gap-2 justify-center items-center">
+        <div className="w-[100vw] h-[100vh] absolute top-0 left-0 bg-headfoot flex flex-col text-2xl gap-8 justify-center items-center">
           {LINKS.map((link) => (
             <MobileLink
               onClick={() => setOpen((prev) => !prev)}
@@ -47,6 +49,7 @@ export default function MobileNavbar() {
             </button>
           )}
           <Theme />
+          <LocaleSwitcherPhone />
         </div>
       )}
     </div>

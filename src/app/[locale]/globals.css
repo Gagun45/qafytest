@@ -46,7 +46,7 @@
   }
 
   .navLink {
-    @apply rounded-full cursor-pointer p-2 h-9 flex items-center justify-center w-24 hover:bg-main;
+    @apply rounded-full cursor-pointer h-10 flex items-center justify-center w-36 md:w-24 hover:bg-main;
   }
 }
 

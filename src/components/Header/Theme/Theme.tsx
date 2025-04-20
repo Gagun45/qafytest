@@ -9,16 +9,16 @@ export default function Theme() {
   return (
     <div
       onClick={toggleTheme}
-      className="h-6 w-12 bg-white border-1 rounded-full flex items-center"
+      className="h-6 w-12 bg-white rounded-full flex items-center cursor-pointer"
     >
       <div
         className={`h-5 w-5 rounded-full bg-black flex justify-center items-center ${
-          theme === "light" ? "ml-0.5" : "ml-6"
+          theme === "light" ? "ml-1" : "ml-6"
         } transition-all duration-500`}
       >
         <FontAwesomeIcon
           icon={theme === "light" ? faMoon : faSun}
-          className="text-white"
+          className="text-white w-3 h-3"
         />
       </div>
     </div>

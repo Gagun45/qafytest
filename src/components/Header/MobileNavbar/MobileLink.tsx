@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 import type { LinkInterface } from "../Navbar/Navbar";
 import Link from "next/link";
 
