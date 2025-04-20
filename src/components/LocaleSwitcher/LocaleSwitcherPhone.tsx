@@ -36,7 +36,7 @@ export default function LocaleSwitcherPhone() {
 
   return (
     <div
-      className={`flex items-center relative py-1 px-2 h-8 rounded-sm ${
+      className={`flex items-center relative py-1 z-30 px-2 h-8 rounded-sm ${
         isOpen && "rounded-b-none"
       } outline-1 outline-white cursor-pointer`}
       onClick={()=>setIsOpen(prev=>!prev)}

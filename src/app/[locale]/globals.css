@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: SFPro;
+  src: url('/public/fonts/sf-pro-display/SFPRODISPLAYBOLD.OTF')
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 @theme {
   --color-headfoot: #000814;
   --color-main: ;
@@ -8,15 +15,18 @@
   --color-anti: ;
   --color-disabled: ;
   --color-text: ;
+  --font-sf: SFPro, 'sans-serif'
 }
 
 :root {
   --mainH: calc(100vh - var(--headH) - var(--footH));
+  --mainHalf: calc(var(--mainH) * 0.5);
 }
 
 [data-theme='light'] {
+  --color-headfoot: gray;
   --color-main: white;
-  --color-anti: yellow
+  --color-text: #080708;
 }
 
 [data-theme='dark'] {
@@ -51,6 +61,6 @@
 }
 
 :root {
-  --headH: 64px;
+  --headH: 120px;
   --footH: 64px;
 }

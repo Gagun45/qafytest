@@ -18,9 +18,9 @@ export default function MobileNavbar() {
   const { data: session } = useSession();
 
   return (
-    <div className="flex md:hidden items-center">
+    <div className="flex md:hidden items-center z-40">
       <div
-        className="flex flex-col h-6 gap-1.5 cursor-pointer z-10"
+        className="flex flex-col h-6 gap-1.5 cursor-pointer z-50"
         onClick={() => setOpen((prev) => !prev)}
       >
         <div className="h-1 bg-text w-10 rounded-full"></div>
