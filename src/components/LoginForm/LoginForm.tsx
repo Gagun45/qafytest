@@ -5,8 +5,11 @@ import React, { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { login } from "@/lib/actions";
 import { Link, useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 export default function LoginForm() {
+  const t = useTranslations("LoginPage");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -16,11 +19,11 @@ export default function LoginForm() {
   const { update } = useSession();
 
   const resetForm = () => {
-    setEmail('')
-    setPassword('')
-    setIsDisabled(true)
-    setIsPending(false)
-  }
+    setEmail("");
+    setPassword("");
+    setIsDisabled(true);
+    setIsPending(false);
+  };
 
   const router = useRouter();
 
@@ -46,7 +49,7 @@ export default function LoginForm() {
       }
     } catch {
       setError("Something went wrong");
-      resetForm()
+      resetForm();
     } finally {
       setIsPending(false);
     }
@@ -54,30 +57,30 @@ export default function LoginForm() {
 
   return (
     <div className="w-4/5 max-w-[325px] flex flex-col gap-[30px]">
-      <h1 className="text-center font-bold text-2xl">Login</h1>
+      <h1 className="text-center font-bold text-2xl">{t("title")}</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="email"
+          placeholder={t('email')}
           name="email"
         />
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="password"
+          placeholder={t('password')}
           name="password"
         />
         {error && <span>{error}</span>}
         <button disabled={isDisabled || isPending} className={styles.button}>
-          {isPending ? "Logging in..." : "Login"}
+          {isPending ? t("pending") : t("title")}
         </button>
         <div>
-          {"Dont have an account? "}
+          {t("noAcc")}{" "}
           <Link href="/register" className="underline underline-offset-2">
-            <b>Register</b>
+            <b>{t("register")}</b>
           </Link>
         </div>
         <div>
@@ -85,7 +88,7 @@ export default function LoginForm() {
             href="/forgot-password"
             className="underline underline-offset-2"
           >
-            <b>Forgot password?</b>
+            <b>{t("forgot")}</b>
           </Link>
         </div>
       </form>
@@ -94,7 +97,7 @@ export default function LoginForm() {
         className={styles.button}
         onClick={() => signIn("google", { callbackUrl: "/" })}
       >
-        Login via Google
+        {t("google")}
       </button>
     </div>
   );

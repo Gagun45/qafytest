@@ -19,5 +19,15 @@
     "3rdP": "Klare Preise – keine versteckten Kosten",
     "4thP": "Mehrsprachiger Service – Deutsch, Englisch & Ukrainisch",
     "5thP": "Online-Auftragsverfolgung über Kundenkonto"
+  },
+  "LoginPage": {
+    "email": "E-Mail",
+    "password": "Passwort",
+    "title": "Anmelden",
+    "noAcc": "Noch kein Konto?",
+    "register": "Registrieren",
+    "forgot": "Passwort vergessen?",
+    "google": "Mit Google anmelden",
+    "pending": "Einloggen..."
   }
 }

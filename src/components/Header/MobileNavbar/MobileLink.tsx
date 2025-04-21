@@ -18,7 +18,7 @@ export default function MobileLink({
       onClick={onClick}
       key={link.path}
       href={link.path}
-      className={`${currentPage && "bg-main"} navLink w-full rounded-none`}
+      className={`${currentPage && "bg-main"} navLink w-full rounded-none h-12`}
     >
       {link.title}
     </Link>

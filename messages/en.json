@@ -19,5 +19,15 @@
     "3rdP": "Clear prices - no hidden costs",
     "4thP": "Multilingual service - German, English & Ukrainian",
     "5thP": "Online application and repair status tracking"
+  },
+  "LoginPage": {
+    "email": "Email",
+    "password": "Password",
+    "title": "Login",
+    "noAcc": "Don`t have an account?",
+    "register": "Register",
+    "forgot": "Forgot password?",
+    "google": "Login via Google",
+    "pending": "Logging in..."
   }
 }
