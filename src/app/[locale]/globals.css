@@ -32,8 +32,11 @@
 
 
 @layer base {
+  input::placeholder {
+    color: gray;
+  }
   main {
-    @apply w-[100vw] p-4 md:p-8 lg:p-12 h-[var(--mainH)] bg-main
+    @apply w-[100vw] p-4 md:p-8 lg:p-12 min-h-[var(--mainH)] bg-main
   }
 
   header {

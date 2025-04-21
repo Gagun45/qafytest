@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex gap-8">
+    <main className="flex gap-8 h-[var(--mainH)]">
       <section className="w-full xl:w-1/2 h-full flex flex-col gap-8 text-justify xs:gap-10 sm:gap-14 md:gap-10 text-2xl">
         <h2 className="text-5xl text-center">
           <span style={{ color: "blue" }}>QAFY</span>{" "}

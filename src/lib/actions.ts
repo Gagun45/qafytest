@@ -23,7 +23,6 @@ export const login = async (email: string, password: string) => {
       if (error.message === "NEXT_REDIRECT") {
         return { success: true };
       }
-      console.log("ERROR MESSSSAAGE:", error.message);
       return { error: error.message };
     }
     throw new Error("Unknown error");

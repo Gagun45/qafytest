@@ -18,19 +18,19 @@ export default function LoginForm() {
   const router = useRouter();
 
   useEffect(() => {
-    setError('')
+    setError("");
     if (!email || !password || password.length < 8) {
       setIsDisabled(true);
     } else setIsDisabled(false);
   }, [email, password]);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    setError("");
-    e.preventDefault();
     try {
+
+      setError("");
+      e.preventDefault();
       const result = await login(email, password);
       if (result.error) {
-        if (result.error === "Wrong password") setPassword("");
         setError(result.error);
       }
       if (result.success) {
@@ -38,10 +38,7 @@ export default function LoginForm() {
         await update();
       }
     } catch {
-      setEmail("");
-      setPassword("");
-      setError("Something went wrong");
-      setIsDisabled(false);
+      setError('Something went wrong')
     }
   };
 
@@ -74,7 +71,10 @@ export default function LoginForm() {
           </Link>
         </div>
         <div>
-          <Link href="/forgot-password" className="underline underline-offset-2">
+          <Link
+            href="/forgot-password"
+            className="underline underline-offset-2"
+          >
             <b>Forgot password?</b>
           </Link>
         </div>
