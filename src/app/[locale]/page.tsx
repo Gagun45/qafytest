@@ -28,12 +28,13 @@ export default function Home() {
             href={"/about"}
             className="bg-headfoot hover:bg-text dark:hover:bg-white hover:text-main w-32 h-12 flex items-center justify-center rounded-sm"
           >
+            Про нас
           </Link>
           <Link
-            href={"/about"}
+            href={"/contact"}
             className="bg-headfoot hover:bg-text dark:hover:bg-white hover:text-main w-32 h-12 flex items-center justify-center rounded-sm"
           >
-            ABOUT 
+            Контакти 
           </Link>
         </div>
       </section>

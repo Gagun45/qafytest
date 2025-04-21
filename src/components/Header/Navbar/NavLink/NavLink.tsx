@@ -1,9 +1,7 @@
 "use client";
 
-import Link from "next/link";
-
 import type { LinkInterface } from "../Navbar";
-import { usePathname } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 
 export default function NavLink({ link }: { link: LinkInterface }) {
   const pathname = usePathname();

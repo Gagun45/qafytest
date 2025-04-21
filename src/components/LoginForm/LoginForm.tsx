@@ -2,10 +2,9 @@
 
 import styles from "./LoginForm.module.css";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { login } from "@/lib/actions";
-import { useRouter } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");

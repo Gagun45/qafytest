@@ -2,10 +2,10 @@
 
 import styles from "./RegisterForm.module.css";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { register } from "@/lib/actions";
+import { Link } from "@/i18n/navigation";
 
 export default function RegisterForm() {
   const [email, setEmail] = useState("");
