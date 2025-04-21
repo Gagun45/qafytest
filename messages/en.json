@@ -1,12 +1,23 @@
 {
-    "HomePage": {
-        "title": "English title"
-    },
-    "NavBarLinks": {
-        "Home": "Home",
-        "WhyUs": "Why us?",
-        "Contact": "Contact",
-        "Login": "Login",
-        "Logout": "Logout"
-    }
+  "HomePage": {
+    "1stP": "Your reliable electronics repair service in Germany",
+    "2ndP": "We are a Ukrainian service center operating in Germany and specializing in the repair of smartphones, laptops, tablets, PCs, consoles and other electronics",
+    "3rdP": "Professional equipment, many years of experience and an individual approach - a guarantee of quality repairs at a reasonable price",
+    "4thP": "We work quickly and with care for the client"
+  },
+  "NavBarLinks": {
+    "Home": "Home",
+    "WhyUs": "Why us?",
+    "Contact": "Contact",
+    "Login": "Login",
+    "Logout": "Logout"
+  },
+  "WhyUsPage": {
+    "title": "Why choose us?",
+    "1stP": "Warranty on all repairs - Quality you can rely on",
+    "2ndP": "Only tested spare parts - no fakes",
+    "3rdP": "Clear prices - no hidden costs",
+    "4thP": "Multilingual service - German, English & Ukrainian",
+    "5thP": "Online application and repair status tracking"
+  }
 }

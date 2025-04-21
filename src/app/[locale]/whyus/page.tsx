@@ -7,38 +7,39 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-const tClass = "text-4xl w-14";
-
-const ROWS = [
-  {
-    text: "Гарантія на всі роботи — ми впевнені в якості",
-    Component: <FontAwesomeIcon icon={faHandshake} className={tClass} />,
-  },
-  {
-    text: "Тільки перевірені запчастини — ніяких підробок",
-    Component: <FontAwesomeIcon icon={faCheckDouble} className={tClass} />,
-  },
-  {
-    text: 'Прозорі ціни — без "сюрпризів" після ремонту',
-    Component: <FontAwesomeIcon icon={faDollar} className={tClass} />,
-  },
-  {
-    text: "Підтримка українською, німецькою та англійською",
-    Component: <FontAwesomeIcon icon={faLanguage} className={tClass} />,
-  },
-  {
-    text: "Можливість онлайн-заявки та відстеження статусу ремонту",
-    Component: <FontAwesomeIcon icon={faContactBook} className={tClass} />,
-  },
-];
+const tClass = "text-4xl lg:text-6xl w-16 flex-shrink-0";
 
 export default function WhyUsPage() {
+  const t = useTranslations("WhyUsPage");
+  const ROWS = [
+    {
+      text: t("1stP"),
+      Component: <FontAwesomeIcon icon={faHandshake} className={tClass} />,
+    },
+    {
+      text: t("2ndP"),
+      Component: <FontAwesomeIcon icon={faCheckDouble} className={tClass} />,
+    },
+    {
+      text: t("3rdP"),
+      Component: <FontAwesomeIcon icon={faDollar} className={tClass} />,
+    },
+    {
+      text: t("4thP"),
+      Component: <FontAwesomeIcon icon={faLanguage} className={tClass} />,
+    },
+    {
+      text: t("5thP"),
+      Component: <FontAwesomeIcon icon={faContactBook} className={tClass} />,
+    },
+  ];
   return (
     <main className="flex">
-      <section className="flex flex-col gap-6 sm:gap-12 lg:gap-24 lg:w-2/3">
-        <h1 className="text-4xl text-center">Чому обирають нас?</h1>
+      <section className="flex flex-col gap-6 sm:gap-12 lg:w-2/3">
+        <h1 className="text-4xl text-center">{t("title")}</h1>
         <div className="flex flex-col gap-12">
           {ROWS.map(({ text, Component }) => (
             <div

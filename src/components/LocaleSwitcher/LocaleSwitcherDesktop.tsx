@@ -37,7 +37,7 @@ export default function LocaleSwitcherDesktop() {
     <div
       className={`flex items-center relative py-1 z-30 px-2 h-8 rounded-sm ${
         isOpen && "rounded-b-none"
-      } outline-1 outline-white cursor-pointer`}
+      } outline-1 outline-text cursor-pointer`}
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
@@ -49,7 +49,7 @@ export default function LocaleSwitcherDesktop() {
         />
       </div>
       {isOpen && (
-        <div className="flex w-full left-0 absolute bg-headfoot flex-col top-8 outline-1 outline-white">
+        <div className="flex w-full left-0 absolute bg-headfoot flex-col top-8 outline-1 outline-text">
           {locales.map(({ locale, Component }) => (
             <div
               key={locale}

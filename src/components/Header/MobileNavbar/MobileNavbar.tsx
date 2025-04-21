@@ -42,12 +42,12 @@ export default function MobileNavbar() {
             <MobileLink
               onClick={() => setOpen((prev) => !prev)}
               key="/login"
-              link={{ path: "/login", title: "Login" }}
+              link={{ path: "/login", title: t("Login") }}
             />
           )}
           {session && (
             <button className="navLink" onClick={() => signOut()}>
-              Logout
+              {t('Logout')}
             </button>
           )}
           <Theme />
