@@ -30,7 +30,6 @@ export default function LocaleSwitcherDesktop() {
   const handleLocaleChange = (locale: string) => {
     startTransition(() => {
       router.replace(pathname, { locale });
-      router.push(pathname);
     });
   };
 

@@ -30,7 +30,6 @@ export default function LocaleSwitcherPhone() {
   const handleLocaleChange = (locale: string) => {
     startTransition(() => {
       router.replace(pathname, { locale });
-      router.push(pathname);
     });
   };
 
