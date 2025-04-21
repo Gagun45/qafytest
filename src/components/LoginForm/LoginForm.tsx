@@ -13,7 +13,15 @@ export default function LoginForm() {
   const [error, setError] = useState("");
 
   const [isDisabled, setIsDisabled] = useState(true);
+  const [isPending, setIsPending] = useState(false);
   const { update } = useSession();
+
+  const resetForm = () => {
+    setEmail('')
+    setPassword('')
+    setIsDisabled(true)
+    setIsPending(false)
+  }
 
   const router = useRouter();
 
@@ -26,7 +34,7 @@ export default function LoginForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     try {
-
+      setIsPending(true);
       setError("");
       e.preventDefault();
       const result = await login(email, password);
@@ -38,7 +46,10 @@ export default function LoginForm() {
         await update();
       }
     } catch {
-      setError('Something went wrong')
+      setError("Something went wrong");
+      resetForm()
+    } finally {
+      setIsPending(false);
     }
   };
 
@@ -61,8 +72,8 @@ export default function LoginForm() {
           name="password"
         />
         {error && <span>{error}</span>}
-        <button disabled={isDisabled} className={styles.button}>
-          Login
+        <button disabled={isDisabled || isPending} className={styles.button}>
+          {isPending ? "Logging in..." : "Login"}
         </button>
         <div>
           {"Dont have an account? "}
@@ -80,6 +91,7 @@ export default function LoginForm() {
         </div>
       </form>
       <button
+        disabled={isPending}
         className={styles.button}
         onClick={() => signIn("google", { callbackUrl: "/" })}
       >

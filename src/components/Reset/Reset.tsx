@@ -14,6 +14,8 @@ export default function Reset({ email }: { email: string }) {
 
   const [error, setError] = useState("");
 
+  const [isPending, setIsPending] = useState(false);
+
   const passwordValidation = () => {
     if (password.length > 24) {
       setPassword(password.slice(0, 25));
@@ -42,11 +44,18 @@ export default function Reset({ email }: { email: string }) {
   }, [error, password]);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    setError("");
-    e.preventDefault();
-    const res = await resetPassword(email, password);
-    if (res === "Success") setIsPassSet(true);
-    else setError(res);
+    try {
+      setIsPending(true);
+      setError("");
+      e.preventDefault();
+      const res = await resetPassword(email, password);
+      if (res === "Success") setIsPassSet(true);
+      else setError(res);
+    } catch {
+      setError("Something went wrong");
+    } finally {
+      setIsPending(false);
+    }
   };
 
   if (isPassSet) {
@@ -64,8 +73,8 @@ export default function Reset({ email }: { email: string }) {
           name="password"
         />
         {error && <span>{error}</span>}
-        <button disabled={isDisabled} className={styles.button}>
-          Set new password
+        <button disabled={isDisabled || isPending} className={styles.button}>
+          {isPending ? "Setting new password..." : "Set new password"}
         </button>
       </form>
     </div>

@@ -13,14 +13,20 @@ export default function Forgot() {
   const [isPending, setIsPending] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    setIsPending(true);
-    e.preventDefault();
-    setStatus("");
-    const res = await forgotPassword(email);
-    if (res === "Success") {
-      setIsSend(true);
-    } else setStatus(res);
-    setIsPending(false);
+    try {
+
+      setIsPending(true);
+      e.preventDefault();
+      setStatus("");
+      const res = await forgotPassword(email);
+      if (res === "Success") {
+        setIsSend(true);
+      } else setStatus(res);
+    } catch {
+      setStatus('Something went wrong')
+    } finally {
+      setIsPending(false)
+    }
   };
 
   useEffect(() => {
@@ -44,7 +50,7 @@ export default function Forgot() {
           name="email"
         />
         <button disabled={isDisabled || isPending} className={styles.button}>
-          {isPending ? "Processing..." : "Send reset link to email"}
+          {isPending ? "Sending a link to email..." : "Send reset link to email"}
         </button>
         <span>{status}</span>
       </form>

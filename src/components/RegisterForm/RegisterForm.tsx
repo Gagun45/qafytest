@@ -76,9 +76,7 @@ export default function RegisterForm() {
       if (result.success) {
         router.push("/login");
       }
-      setIsPending(false);
     } catch {
-      setIsPending(false);
       setEmailIsTaken("");
       setEmail("");
       setPassword("");
@@ -86,6 +84,8 @@ export default function RegisterForm() {
       setPasswordError("");
       setIsDisabled(true);
       setResponse("Something went wrong");
+    } finally {
+      setIsPending(false);
     }
   };
 
@@ -118,7 +118,7 @@ export default function RegisterForm() {
         {passwordError && <span>{passwordError}</span>}
         {response && <span>{response}</span>}
         <button disabled={isDisabled || isPending} className={styles.button}>
-          {isPending ? "Processing..." : "Register"}
+          {isPending ? "Registering..." : "Register"}
         </button>
         <div>
           {"Already have an account? "}
