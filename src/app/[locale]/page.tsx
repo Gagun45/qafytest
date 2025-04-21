@@ -3,13 +3,13 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex gap-8 h-[var(--mainH)]">
-      <section className="w-full xl:w-1/2 h-full flex flex-col gap-8 text-justify xs:gap-10 sm:gap-14 md:gap-10 text-2xl">
+    <main className="flex gap-8 xl:h-[var(--mainH)]">
+      <section className="w-full xl:w-1/2 h-full flex flex-col gap-4 text-justify xs:gap-10 sm:gap-14 md:gap-10 text-lg sm:text-2xl">
         <h2 className="text-5xl text-center">
           <span style={{ color: "blue" }}>QAFY</span>{" "}
           <span className="text-yellow-400">MOBILE</span>
         </h2>
-        <p>Ваш надійний сервіс з ремонту електроніки у Німеччині</p>
+        <p className="text-2xl font-semibold">Ваш надійний сервіс з ремонту електроніки у Німеччині</p>
         <p>
           Ми — український сервісний центр, що працює на території Німеччини та
           спеціалізується на ремонті смартфонів, ноутбуків, планшетів, ПК,
