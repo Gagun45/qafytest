@@ -38,8 +38,8 @@ export default function WhyUsPage() {
   ];
   return (
     <main className="flex">
-      <section className="flex flex-col gap-6 sm:gap-12 lg:w-2/3">
-        <h1 className="text-4xl text-center">{t("title")}</h1>
+      <section className="flex flex-col gap-6 sm:gap-12 xl:gap-9 2xl:gap-12 lg:w-2/3">
+        <h1 className="pageTitle">{t("title")}</h1>
         <div className="flex flex-col gap-12">
           {ROWS.map(({ text, Component }) => (
             <div

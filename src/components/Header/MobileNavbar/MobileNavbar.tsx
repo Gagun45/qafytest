@@ -16,7 +16,7 @@ export default function MobileNavbar() {
   const LINKS: LinkInterface[] = [
     { title: t("Home"), path: "/" },
     { title: t("WhyUs"), path: "/whyus" },
-    { title: t("Contact"), path: "/contact" },
+    { title: t("Services"), path: "/services" },
   ];
 
   return (
