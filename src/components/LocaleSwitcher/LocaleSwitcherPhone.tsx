@@ -28,10 +28,9 @@ export default function LocaleSwitcherPhone() {
   const [, startTransition] = useTransition();
 
   const handleLocaleChange = (locale: string) => {
-    document.cookie = `NEXT_LOCALE=${locale}; path=/`;
     startTransition(() => {
       router.replace(pathname, { locale });
-      window.location.reload();
+      router.push(pathname);
     });
   };
 
