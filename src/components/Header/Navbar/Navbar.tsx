@@ -11,7 +11,7 @@ export default function Navbar() {
   const t = useTranslations("NavBarLinks");
   const LINKS: LinkInterface[] = [
     { title: t("Home"), path: "/" },
-    { title: t("About"), path: "/about" },
+    { title: t("WhyUs"), path: "/whyus" },
     { title: t("Contact"), path: "/contact" },
   ];
   return (

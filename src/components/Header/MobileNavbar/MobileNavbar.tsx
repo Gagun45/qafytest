@@ -6,16 +6,18 @@ import MobileLink from "./MobileLink";
 import { signOut, useSession } from "next-auth/react";
 import Theme from "../Theme/Theme";
 import LocaleSwitcherPhone from "@/components/LocaleSwitcher/LocaleSwitcherPhone";
-
-const LINKS: LinkInterface[] = [
-  { title: "Home", path: "/" },
-  { title: "About", path: "/about" },
-  { title: "Contact", path: "/contact" },
-];
+import { useTranslations } from "next-intl";
 
 export default function MobileNavbar() {
   const [open, setOpen] = useState(false);
   const { data: session } = useSession();
+
+  const t = useTranslations("NavBarLinks");
+  const LINKS: LinkInterface[] = [
+    { title: t("Home"), path: "/" },
+    { title: t("WhyUs"), path: "/whyus" },
+    { title: t("Contact"), path: "/contact" },
+  ];
 
   return (
     <div className="flex md:hidden items-center z-40">
