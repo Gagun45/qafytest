@@ -1,4 +1,5 @@
 {
+  "smthWentWrong": "Etwas ist schiefgelaufen",
   "HomePage": {
     "1stP": "Ihr zuverlässiger Elektronik-Reparaturservice in Deutschland",
     "2ndP": "Wir sind ein ukrainischer Reparaturservice mit Sitz in Deutschland, spezialisiert auf die Reparatur von Smartphones, Laptops, Tablets, PCs, Konsolen und anderer Elektronik",
@@ -28,6 +29,8 @@
     "register": "Registrieren",
     "forgot": "Passwort vergessen?",
     "google": "Mit Google anmelden",
-    "pending": "Einloggen..."
+    "pending": "Einloggen...",
+    "wrongEmail": "Falsche E-Mail",
+    "wrongPassword": "Falsches Passwort"
   }
 }

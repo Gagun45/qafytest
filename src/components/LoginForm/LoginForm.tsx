@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 
 export default function LoginForm() {
   const t = useTranslations("LoginPage");
+  const smthWentWrong = useTranslations()("smthWentWrong");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,13 +18,6 @@ export default function LoginForm() {
   const [isDisabled, setIsDisabled] = useState(true);
   const [isPending, setIsPending] = useState(false);
   const { update } = useSession();
-
-  const resetForm = () => {
-    setEmail("");
-    setPassword("");
-    setIsDisabled(true);
-    setIsPending(false);
-  };
 
   const router = useRouter();
 
@@ -40,16 +34,15 @@ export default function LoginForm() {
       setError("");
       e.preventDefault();
       const result = await login(email, password);
-      if (result.error) {
-        setError(result.error);
-      }
       if (result.success) {
         router.push("/");
         await update();
       }
+      if (result.error) {
+        setError(result.error);
+      }
     } catch {
-      setError("Something went wrong");
-      resetForm();
+      setError(smthWentWrong);
     } finally {
       setIsPending(false);
     }
@@ -63,14 +56,14 @@ export default function LoginForm() {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder={t('email')}
+          placeholder={t("email")}
           name="email"
         />
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder={t('password')}
+          placeholder={t("password")}
           name="password"
         />
         {error && <span>{error}</span>}

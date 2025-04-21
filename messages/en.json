@@ -1,4 +1,5 @@
 {
+  "smthWentWrong": "Something went wrong",
   "HomePage": {
     "1stP": "Your reliable electronics repair service in Germany",
     "2ndP": "We are a Ukrainian service center operating in Germany and specializing in the repair of smartphones, laptops, tablets, PCs, consoles and other electronics",
@@ -28,6 +29,8 @@
     "register": "Register",
     "forgot": "Forgot password?",
     "google": "Login via Google",
-    "pending": "Logging in..."
+    "pending": "Logging in...",
+    "wrongEmail": "Wrong email",
+    "wrongPassword": "Wrong password"
   }
 }

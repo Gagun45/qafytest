@@ -5,8 +5,10 @@ import { connectToDb } from "./connect";
 import crypto from "crypto";
 import { User } from "./models";
 import nodemailer from "nodemailer";
+import { getTranslations } from "next-intl/server";
 
 export const login = async (email: string, password: string) => {
+  const t = await getTranslations("LoginPage");
   try {
     await connectToDb();
     const user = await User.findOne({ email });
@@ -23,7 +25,13 @@ export const login = async (email: string, password: string) => {
       if (error.message === "NEXT_REDIRECT") {
         return { success: true };
       }
-      return { error: error.message };
+      if (error.message === "Wrong email") {
+        return { error: t("wrongEmail") };
+      }
+
+      if (error.message === "Wrong password") {
+        return { error: t("wrongPassword") };
+      }
     }
     throw new Error("Unknown error");
   }
