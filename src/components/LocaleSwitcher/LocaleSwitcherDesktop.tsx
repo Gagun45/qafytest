@@ -28,7 +28,7 @@ export default function LocaleSwitcherDesktop() {
   const [, startTransition] = useTransition();
 
   const handleLocaleChange = (locale: string) => {
-    setIsOpen(false);
+    document.cookie = `NEXT_LOCALE=${locale}; path=/`;
     startTransition(() => {
       router.replace(pathname, { locale });
     });

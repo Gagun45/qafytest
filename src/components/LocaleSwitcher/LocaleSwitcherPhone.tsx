@@ -28,7 +28,7 @@ export default function LocaleSwitcherPhone() {
   const [, startTransition] = useTransition();
 
   const handleLocaleChange = (locale: string) => {
-    setIsOpen(false);
+    document.cookie = `NEXT_LOCALE=${locale}; path=/`;
     startTransition(() => {
       router.replace(pathname, { locale });
     });
@@ -39,7 +39,7 @@ export default function LocaleSwitcherPhone() {
       className={`flex items-center relative py-1 z-30 px-2 h-8 rounded-sm ${
         isOpen && "rounded-b-none"
       } outline-1 outline-white cursor-pointer`}
-      onClick={()=>setIsOpen(prev=>!prev)}
+      onClick={() => setIsOpen((prev) => !prev)}
     >
       <div className="flex items-center gap-2">
         <CurrentComponent className="w-5" />

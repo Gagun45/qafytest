@@ -1,11 +1,8 @@
-"use client";
 
-import { useLocale } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
-  const locale = useLocale();
   return (
     <main className="flex gap-8 xl:h-[var(--mainH)]">
       <section className="w-full xl:w-1/2 h-full flex flex-col gap-4 text-justify xs:gap-10 sm:gap-14 md:gap-10 text-lg sm:text-2xl">
@@ -31,14 +28,13 @@ export default function Home() {
             href={"/about"}
             className="bg-headfoot hover:bg-text dark:hover:bg-white hover:text-main w-32 h-12 flex items-center justify-center rounded-sm"
           >
-            ABOUT NO LOCALE
+            ABOUT
           </Link>
           <Link
             href={"/about"}
-            locale={locale}
             className="bg-headfoot hover:bg-text dark:hover:bg-white hover:text-main w-32 h-12 flex items-center justify-center rounded-sm"
           >
-            ABOUT LOCALE
+            ABOUT 
           </Link>
         </div>
       </section>
