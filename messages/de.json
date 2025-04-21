@@ -65,5 +65,16 @@
     "success": "Neues Passwort wurde erfolgreich festgelegt",
     "redirect": "Sie werden in {countdown} Sekunden zur Anmeldeseite weitergeleitet",
     "goToLogin": "Gehe zur Anmeldeseite"
+  },
+  "ServicesPage": {
+    "title": "Unsere Leistungen",
+    "1st": "Gerätediagnose",
+    "2nd": "Display- und Sensoraustauscht",
+    "3rd": "Platinenreparatur (Löten, Wasserrückgewinnung)",
+    "4th": "PC-/Laptop-Reinigung und -Wartung",
+    "5th": "Geräte-Flashing und -Entsperrung",
+    "6th": "Akkuwechsel",
+    "7th": "Softwareinstallation",
+    "8th": "Spielekonsolenreparatur (PS5, Xbox, Nintendo)"
   }
 }

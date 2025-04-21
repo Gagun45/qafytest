@@ -65,5 +65,16 @@
     "success": "New password has been successfully set",
     "redirect": "You will be redirected to login page in {countdown} seconds",
     "goToLogin": "Go to Login page"
+  },
+  "ServicesPage": {
+    "title": "Our services",
+    "1st": "Device diagnostics",
+    "2nd": "Display and sensor replacement",
+    "3rd": "Board repair (soldering, water recovery)",
+    "4th": "PC/laptop cleaning and maintenance",
+    "5th": "Device flashing and unlocking",
+    "6th": "Battery replacement",
+    "7th": "Software installation",
+    "8th": "Game console repair (PS5, Xbox, Nintendo)"
   }
 }
