@@ -7,7 +7,7 @@ import SessionWrapper from "./SessionWrapper";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Qafy",
@@ -30,13 +30,6 @@ export default async function RootLayout({
     notFound();
   }
 
-  let messages
-  try {
-    messages = await getMessages()
-  } catch {
-    notFound()
-  }
-
   setRequestLocale(locale);
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -45,7 +38,7 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         <ThemeProvider>
-          <NextIntlClientProvider locale={locale} messages={messages}>
+          <NextIntlClientProvider>
             <SessionWrapper>
               <Header />
               {children}

@@ -1,6 +1,6 @@
 
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Home() {
   return (
@@ -28,7 +28,6 @@ export default function Home() {
             href={"/about"}
             className="bg-headfoot hover:bg-text dark:hover:bg-white hover:text-main w-32 h-12 flex items-center justify-center rounded-sm"
           >
-            ABOUT
           </Link>
           <Link
             href={"/about"}
