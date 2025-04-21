@@ -31,6 +31,7 @@ export default function LocaleSwitcherDesktop() {
     document.cookie = `NEXT_LOCALE=${locale}; path=/`;
     startTransition(() => {
       router.replace(pathname, { locale });
+      window.location.reload();
     });
   };
 
