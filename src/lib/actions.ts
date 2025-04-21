@@ -52,8 +52,7 @@ export const register = async (email: string, password: string) => {
       password,
     });
     return { success: true };
-  } catch (err) {
-    console.log("Registration error: ", err);
+  } catch {
     return { error: "Something went wrong, try later" };
   }
 };

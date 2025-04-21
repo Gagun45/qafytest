@@ -6,8 +6,15 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { register } from "@/lib/actions";
 import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 export default function RegisterForm() {
+  const t = useTranslations("RegisterPage");
+  const smthWentWrong = useTranslations("smthWentWrong");
+  const emailTaken = t("emailTaken");
+  const minLength = t('minLenght')
+  const pwdMatch = t('pwdMatch')
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -36,15 +43,14 @@ export default function RegisterForm() {
       setIsDisabled(false);
     }
     if (password && passwordConfirm && password !== passwordConfirm) {
-      setPasswordError("Passwords dont match");
+      setPasswordError(pwdMatch);
       setIsDisabled(true);
     }
     if (!password || !passwordConfirm) {
       setPasswordError("");
-      setIsDisabled(true);
     }
     if (password && password.length < 8) {
-      setPasswordError("Password must be at least 8 symbols long");
+      setPasswordError(minLength);
       setIsDisabled(true);
     }
   };
@@ -68,7 +74,7 @@ export default function RegisterForm() {
         if (result.error === "Email already taken") {
           setPassword("");
           setPasswordConfirm("");
-          setEmailIsTaken(`Email ${email} already taken`);
+          setEmailIsTaken(emailTaken);
         } else {
           setResponse(result.error);
         }
@@ -83,7 +89,7 @@ export default function RegisterForm() {
       setPasswordConfirm("");
       setPasswordError("");
       setIsDisabled(true);
-      setResponse("Something went wrong");
+      setResponse(smthWentWrong);
     } finally {
       setIsPending(false);
     }
@@ -91,39 +97,39 @@ export default function RegisterForm() {
 
   return (
     <div className="w-4/5 max-w-[325px] flex flex-col gap-[30px]">
-      <h1 className="text-center font-bold text-2xl">Register</h1>
+      <h1 className="text-center font-bold text-2xl">{t("title")}</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="email"
+          placeholder={t("email")}
           name="email"
         />
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="password"
+          placeholder={t("password")}
           name="password"
         />
         <input
           type="password"
           value={passwordConfirm}
           onChange={(e) => setPasswordConfirm(e.target.value)}
-          placeholder="password repeat"
+          placeholder={t("passwordRepeat")}
           name="passwordConfirm"
         />
         {emailIsTaken && <span>{emailIsTaken}</span>}
         {passwordError && <span>{passwordError}</span>}
         {response && <span>{response}</span>}
-        <button disabled={isDisabled || isPending} className={styles.button}>
-          {isPending ? "Registering..." : "Register"}
+        <button disabled={isDisabled || isPending || !email || !password || !passwordConfirm} className={styles.button}>
+          {isPending ? t("pending") : t("title")}
         </button>
         <div>
-          {"Already have an account? "}
+          {t("alreadyAcc")}{" "}
           <Link href="/login" className="underline underline-offset-2">
-            <b>Login</b>
+            <b>{t("login")}</b>
           </Link>
         </div>
       </form>
@@ -132,7 +138,7 @@ export default function RegisterForm() {
         className={styles.button}
         onClick={() => signIn("google", { callbackUrl: "/" })}
       >
-        Login via Google
+        {t("google")}
       </button>
     </div>
   );
