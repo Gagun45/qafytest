@@ -34,7 +34,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`font-sf transition-all duration-300 overflow-x-hidden text-text antialiased`}
+        className={`transition-all duration-300 overflow-x-hidden text-text antialiased`}
         suppressHydrationWarning
       >
         <ThemeProvider>

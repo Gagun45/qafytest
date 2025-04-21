@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: SFPro;
-  src: url('/public/fonts/sf-pro-display/SFPRODISPLAYBOLD.OTF')
-}
-
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
@@ -15,12 +10,12 @@
   --color-anti: ;
   --color-disabled: ;
   --color-text: ;
-  --font-sf: SFPro, 'sans-serif'
+  --breakpoint-xs: 30rem;
 }
 
 :root {
   --mainH: calc(100vh - var(--headH) - var(--footH));
-  --mainHalf: calc(var(--mainH) * 0.5);
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
 
 [data-theme='light'] {
@@ -38,7 +33,7 @@
 
 @layer base {
   main {
-    @apply w-[100vw] p-4 md:p-8 lg:p-12 min-h-[var(--mainH)] bg-main
+    @apply w-[100vw] p-4 md:p-8 lg:p-12 h-[var(--mainH)] bg-main
   }
 
   header {

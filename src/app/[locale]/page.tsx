@@ -3,33 +3,42 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex flex-col lg:items-center lg:flex-row gap-8 justify-between">
-      <section className="flex flex-col lg:w-1/2 gap-8 text-center">
-        <h2 className="text-5xl">QAFY-MOBILE - майстерня сучасного сервісу</h2>
-        <p className="text-lg">
-          Qafy-mobile — це сервіс нового покоління для тих, хто цінує якість,
-          швидкість і чесний підхід. Ми не просто ремонтуємо техніку — ми
-          повертаємо комфорт у твій щоденний ритм.
+    <main className="flex gap-8">
+      <section className="w-full xl:w-1/2 h-full flex flex-col gap-8 text-justify xs:gap-10 sm:gap-14 md:gap-10 text-2xl">
+        <h2 className="text-5xl text-center">
+          <span style={{ color: "blue" }}>QAFY</span>{" "}
+          <span className="text-yellow-400">MOBILE</span>
+        </h2>
+        <p>Ваш надійний сервіс з ремонту електроніки у Німеччині</p>
+        <p>
+          Ми — український сервісний центр, що працює на території Німеччини та
+          спеціалізується на ремонті смартфонів, ноутбуків, планшетів, ПК,
+          консолей та іншої електроніки.
         </p>
-        <div className="flex justify-center gap-8">
+        <p>
+          Професійне обладнання, багаторічний досвід та індивідуальний підхід —
+          гарантія якісного ремонту за розумну ціну.
+        </p>
+        <p>Працюємо швидко та з турботою про клієнта.</p>
+        <div className="flex justify-center md:justify-start mt-auto gap-8 py-0 sm:py-2 md:py-0">
           <Link
             href={"/"}
-            className="bg-headfoot w-32 h-12 flex items-center justify-center rounded-full"
+            className="bg-headfoot hover:bg-text dark:hover:bg-white hover:text-main w-32 h-12 flex items-center justify-center rounded-sm"
           >
-            Contact
+            Послуги
           </Link>
           <Link
             href={"/"}
-            className="bg-headfoot dark:hover:bg-white hover:text-main w-32 h-12 flex items-center justify-center rounded-full"
+            className="bg-headfoot hover:bg-text dark:hover:bg-white hover:text-main w-32 h-12 flex items-center justify-center rounded-sm"
           >
-            Contact
+            Контакти
           </Link>
         </div>
       </section>
 
-      <section className="h-64 sm:h-84 lg:h-[440px] xl:h-[556px] 2xl:h-[640px] flex w-full justify-center lg:w-1/2">
-        <div className="h-full w-[384px] sm:w-[460px] md:w-[620px] lg:w-full max-w-[816px] flex relative">
-          <Image src={"/home.jpg"} alt="home" fill />
+      <section className="hidden xl:flex w-1/2 h-full">
+        <div className="flex h-full w-full relative">
+          <Image src={"/qafy-mobile.png"} alt="home" fill className="object-contain" />
         </div>
       </section>
     </main>
