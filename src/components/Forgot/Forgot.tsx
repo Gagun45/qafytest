@@ -4,8 +4,12 @@ import { useEffect, useState } from "react";
 import styles from "./Forgot.module.css";
 import { forgotPassword } from "@/lib/actions";
 import Fgsuccess from "./Fgsuccess";
+import { useTranslations } from "next-intl";
 
 export default function Forgot() {
+  const t = useTranslations("ForgotPage");
+  const smthWentWrong = useTranslations("smthWentWrong");
+  const noUser = t('noUser')
   const [email, setEmail] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
   const [status, setStatus] = useState("");
@@ -14,18 +18,20 @@ export default function Forgot() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     try {
-
       setIsPending(true);
       e.preventDefault();
       setStatus("");
       const res = await forgotPassword(email);
       if (res === "Success") {
         setIsSend(true);
-      } else setStatus(res);
+      }
+      if (res === 'No user exists with such email') {
+        setStatus(noUser)
+      }
     } catch {
-      setStatus('Something went wrong')
+      setStatus(smthWentWrong);
     } finally {
-      setIsPending(false)
+      setIsPending(false);
     }
   };
 
@@ -37,20 +43,20 @@ export default function Forgot() {
   if (isSend) {
     return <Fgsuccess email={email} />;
   }
-  
+
   return (
     <div className="w-full max-w-[325px] flex flex-col gap-[30px]">
-      <h1 className="text-center font-bold text-2xl">Forgot password</h1>
+      <h1 className="text-center font-bold text-2xl">{t("title")}</h1>
       <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="email"
+          placeholder={t("email")}
           name="email"
         />
         <button disabled={isDisabled || isPending} className={styles.button}>
-          {isPending ? "Sending a link to email..." : "Send reset link to email"}
+          {isPending ? t("pending") : t("send")}
         </button>
         <span>{status}</span>
       </form>

@@ -4,9 +4,14 @@ import { useEffect, useState } from "react";
 import styles from "./Reset.module.css";
 import { resetPassword } from "@/lib/actions";
 import Rssuccess from "./Rssuccess";
+import { useTranslations } from "next-intl";
 
 export default function Reset({ email }: { email: string }) {
   const [password, setPassword] = useState("");
+
+  const t = useTranslations("ResetPage");
+
+  const smthWentWrong = useTranslations("smthWentWrong");
 
   const [isDisabled, setIsDisabled] = useState(true);
 
@@ -50,9 +55,8 @@ export default function Reset({ email }: { email: string }) {
       e.preventDefault();
       const res = await resetPassword(email, password);
       if (res === "Success") setIsPassSet(true);
-      else setError(res);
     } catch {
-      setError("Something went wrong");
+      setError(smthWentWrong);
     } finally {
       setIsPending(false);
     }
@@ -63,18 +67,18 @@ export default function Reset({ email }: { email: string }) {
   }
   return (
     <div className="w-full max-w-[325px] flex flex-col gap-[30px]">
-      <h1 className="text-center font-bold text-2xl">Forgot password</h1>
+      <h1 className="text-center font-bold text-2xl">{t("title")}</h1>
       <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="New password"
+          placeholder={t("newPwd")}
           name="password"
         />
         {error && <span>{error}</span>}
         <button disabled={isDisabled || isPending} className={styles.button}>
-          {isPending ? "Setting new password..." : "Set new password"}
+          {isPending ? t("pending") : t("setNew")}
         </button>
       </form>
     </div>

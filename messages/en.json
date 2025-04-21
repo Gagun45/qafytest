@@ -45,5 +45,25 @@
     "emailTaken": "The email is already taken",
     "minLenght": "Password must be at least 8 symbols long",
     "pwdMatch": "Passwords dont match"
+  },
+  "ForgotPage": {
+    "title": "Forgot password",
+    "email": "Email",
+    "send": "Send a reset link",
+    "pending": "Sending...",
+    "noUser": "No user exists with such email",
+    "success": "Reset link has been successfully sent to {email}",
+    "redirect": "You will be redirected to login page in {countdown} seconds",
+    "goToLogin": "Go to Login page"
+  },
+  "ResetPage": {
+    "title": "Reset password",
+    "newPwd": "New password",
+    "setNew": "Set new password",
+    "minLenght": "Password must be at least 8 symbols long",
+    "pending": "Applying...",
+    "success": "New password has been successfully set",
+    "redirect": "You will be redirected to login page in {countdown} seconds",
+    "goToLogin": "Go to Login page"
   }
 }

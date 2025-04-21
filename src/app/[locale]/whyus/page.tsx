@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-const tClass = "text-4xl lg:text-6xl w-16 flex-shrink-0";
+const tClass = "text-4xl lg:text-6xl w-16 shrink-0";
 
 export default function WhyUsPage() {
   const t = useTranslations("WhyUsPage");
@@ -40,7 +40,7 @@ export default function WhyUsPage() {
     <main className="flex">
       <section className="flex flex-col gap-6 sm:gap-12 xl:gap-9 2xl:gap-12 lg:w-2/3">
         <h1 className="pageTitle">{t("title")}</h1>
-        <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-10 md:gap-12">
           {ROWS.map(({ text, Component }) => (
             <div
               key={text}

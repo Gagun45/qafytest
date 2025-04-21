@@ -6,7 +6,7 @@ export default function Home() {
   const t = useTranslations("HomePage");
   return (
     <main className="flex gap-8">
-      <section className="w-full xl:w-1/2 h-full flex flex-col gap-4 text-justify xs:gap-10 sm:gap-14 md:gap-10 text-lg sm:text-2xl">
+      <section className="w-full xl:w-1/2 h-full flex flex-col gap-4 text-justify xs:gap-10 sm:gap-12 md:gap-10 text-lg sm:text-2xl">
         <h1 className="pageTitle">
           <span style={{ color: "blue" }}>QAFY</span>{" "}
           <span className="text-yellow-400">MOBILE</span>
@@ -18,13 +18,13 @@ export default function Home() {
         <div className="flex justify-center md:justify-start mt-auto gap-8 py-0 sm:py-2 md:py-0">
           <Link
             href={"/whyus"}
-            className="bg-headfoot hover:bg-text dark:hover:bg-white hover:text-main w-32 h-12 flex items-center justify-center rounded-sm"
+            className="bg-headfoot hover:bg-text dark:hover:bg-white hover:text-main sm:text-xl w-40 h-12 flex items-center justify-center rounded-sm"
           >
             {useTranslations('NavBarLinks')('WhyUs')}
           </Link>
           <Link
             href={"/services"}
-            className="bg-headfoot hover:bg-text dark:hover:bg-white hover:text-main w-32 h-12 flex items-center justify-center rounded-sm"
+            className="bg-headfoot hover:bg-text dark:hover:bg-white hover:text-main sm:text-xl w-40 h-12 flex items-center justify-center rounded-sm"
           >
             {useTranslations('NavBarLinks')('Services')}
           </Link>

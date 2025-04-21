@@ -1,9 +1,11 @@
-import { useRouter } from "@/i18n/navigation";
-import Link from "next/link";
+import { Link, useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 export default function Rssuccess() {
   const [countdown, setCountdown] = useState(5);
+
+  const t = useTranslations("ResetPage");
 
   const router = useRouter();
 
@@ -29,18 +31,14 @@ export default function Rssuccess() {
 
   return (
     <div className="text-xl lg:text-4xl lg:gap-20 flex flex-col justify-center gap-12">
-      <p>New password has been successfully set</p>
-      <p>You will be redirected to login page in {countdown} seconds</p>
-      <p>
-        Go to{" "}
-        <Link
-          href="/login"
-          className="underline lg:text-5xl text-2xl underline-offset-2"
-        >
-          Login
-        </Link>{" "}
-        page
-      </p>
+      <p>{t("success")}</p>
+      <p>{t("redirect", { countdown })}</p>
+      <Link
+        href="/login"
+        className="underline lg:text-5xl text-2xl underline-offset-2"
+      >
+        {t('goToLogin')}
+      </Link>{" "}
     </div>
   );
 }

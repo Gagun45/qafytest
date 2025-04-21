@@ -46,7 +46,7 @@ export default function MobileNavbar() {
             />
           )}
           {session && (
-            <button className="navLink" onClick={() => signOut()}>
+            <button className="navLink w-full rounded-none h-12" onClick={() => signOut()}>
               {t('Logout')}
             </button>
           )}
