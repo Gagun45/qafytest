@@ -1,20 +1,49 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./ApplicationForm.module.css";
 import { createApplication } from "@/lib/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import TextAreaAutosize from "react-textarea-autosize";
 
-export const MAX_FILE_SIZE_MB = 10;
+export const MAX_FILE_SIZE_MB = 8;
+
+export type ImageType = {
+  file: File;
+  url: string;
+};
 
 export default function ApplicationForm() {
   const [status, setStatus] = useState("");
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState("");
-  const [filename, setFilename] = useState("");
-  const [url, setUrl] = useState("");
+  const [files, setFiles] = useState<ImageType[]>([]);
+
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  const [overallSize, setOverallSize] = useState(0);
+
+  useEffect(() => {
+    const newSize = files.reduce(
+      (sum, image) =>
+        sum + parseFloat((image.file.size / (1024 * 1024)).toFixed(2)),
+      0
+    );
+    setOverallSize(newSize);
+  }, [files]);
+
+  useEffect(() => {
+    if (overallSize > MAX_FILE_SIZE_MB) {
+      setIsDisabled(true);
+      setError(
+        `Overall size of attached images is bigger (${overallSize.toPrecision(2)}mb) than limit (${MAX_FILE_SIZE_MB}mb)`
+      );
+    } else {
+      setIsDisabled(false);
+      setError("");
+    }
+  }, [overallSize]);
 
   const formRef = useRef<HTMLFormElement>(null);
   const inputFileRef = useRef<HTMLInputElement>(null);
@@ -29,12 +58,15 @@ export default function ApplicationForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!overallSize) {
+      return;
+    }
     setIsPending(true);
     setStatus("");
 
     const formData = new FormData(e.currentTarget);
     try {
-      const res = await createApplication(formData);
+      const res = await createApplication(formData, files);
       if (res) {
         setStatus(success);
       } else {
@@ -42,10 +74,10 @@ export default function ApplicationForm() {
       }
       formRef.current?.reset();
       setError("");
-      setFilename("");
     } catch {
       setStatus(failed);
     } finally {
+      setFiles([])
       setIsPending(false);
     }
   };
@@ -59,29 +91,16 @@ export default function ApplicationForm() {
     if (!file.type.startsWith("image/")) {
       setError("Please upload a valid image file");
       e.target.value = "";
-      setFilename("");
-      return;
-    }
-    const fileSizeMB = file.size / (1024 * 1024);
-    if (fileSizeMB > MAX_FILE_SIZE_MB) {
-      setError(
-        `The image is too big (${fileSizeMB.toPrecision(
-          2
-        )}mb>2mb), please choose smaller one`
-      );
-      e.target.value = "";
-      setFilename("");
       return;
     }
     const previewUrl = URL.createObjectURL(file);
-    setUrl(previewUrl);
-    setFilename(file.name);
-    setError("");
+    setFiles((prev) => [...prev, { file, url: previewUrl }]);
+    e.target.value = "";
   };
 
-  const handleCancelAttach = () => {
-    setFilename("");
-    inputFileRef.current!.value = "";
+  const handleCancelAttach = (filename: string) => {
+    const filteredFiles = files.filter((image) => image.file.name !== filename);
+    setFiles(filteredFiles);
   };
 
   return (
@@ -133,19 +152,29 @@ export default function ApplicationForm() {
             className="flex bg-headfoot py-1 px-2 rounded-sm w-36 justify-center cursor-pointer"
             onClick={() => inputFileRef.current?.click()}
           >
-            {filename ? "Image attached" : "Attach an image"}
+            {files.length > 0 ? "Image attached" : "Attach an image"}
           </button>
-          {filename && (
-            <div className="flex gap-2 flex-col">
-              <div className="flex items-center gap-2">
-                <span>{filename}</span>
-                <FontAwesomeIcon
-                  icon={faXmark}
-                  onClick={handleCancelAttach}
-                  className="cursor-pointer"
-                />
-              </div>
-              <img src={url} alt="Preview" className="max-w-44 max-h-60" />
+          {files && (
+            <div className="flex flex-wrap gap-3">
+              {files.map((image) => (
+                <div key={image.url} className="flex flex-col gap-1">
+                  <div className="flex items-center gap-2">
+                    <span>{image.file.name}</span>
+                    <FontAwesomeIcon
+                      icon={faXmark}
+                      onClick={() => handleCancelAttach(image.file.name)}
+                      className="cursor-pointer"
+                    />
+                  </div>
+                  <div className="w-40 h-40 flex items-start justify-center">
+                    <img
+                      src={image.url}
+                      alt="Preview"
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
           )}
 
@@ -161,7 +190,7 @@ export default function ApplicationForm() {
             <span className="flex text-left text-red-600">{error}</span>
           )}
         </div>
-        <button disabled={isPending} className={styles.button}>
+        <button disabled={isPending || isDisabled} className={styles.button}>
           {isPending ? "Submitting..." : "Submit"}
         </button>
       </form>

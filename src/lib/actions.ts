@@ -7,6 +7,7 @@ import { User } from "./models";
 import nodemailer from "nodemailer";
 import { getTranslations } from "next-intl/server";
 import { v2 as cloudinary, type UploadApiResponse } from "cloudinary";
+import type { ImageType } from "@/components/ApplicationForm/ApplicationForm";
 
 const WORK_EMAIL = "selyanchyn45@gmail.com";
 
@@ -164,21 +165,32 @@ const imageUpload = async (image: File): Promise<UploadApiResponse> => {
   });
 };
 
-export const createApplication = async (formData: FormData) => {
+export const createApplication = async (
+  formData: FormData,
+  files: ImageType[]
+) => {
+  const newSize = files.reduce(
+    (sum, image) =>
+      sum + parseFloat((image.file.size / (1024 * 1024)).toFixed(2)),
+    0
+  );
+  if (newSize>8) { //NEXT.CONFIG.TS BODYSIZE LIMIT
+    return false
+  } 
   const name = formData.get("name") as string;
   const contact = formData.get("contact") as string;
   const device = formData.get("device") as string;
   const description = formData.get("description") as string;
 
-  const image = formData.get("image") as File;
+  const imageUrls: string[] = [];
 
-  let imageUrl = "";
-
-  try {
-    const res = await imageUpload(image);
-    imageUrl = res.secure_url;
-  } catch {
-    console.log("No image provided");
+  for (const image of files) {
+    try {
+      const res = await imageUpload(image.file);
+      imageUrls.push(res.secure_url);
+    } catch {
+      console.log("Image upload failed for one of the images");
+    }
   }
 
   const html = `New application has been submitted!<br>
@@ -186,15 +198,26 @@ export const createApplication = async (formData: FormData) => {
   Contact: ${contact}<br>
   Device type: ${device}<br>
   Description: ${description}<br>
-  ${imageUrl && `<a href=${imageUrl}>Attachment url</a>`}
+  Attached files: ${files.length}
   `;
 
+  const attachments: AttachInterface[] = imageUrls.map((url, index) => ({
+    filename: `image-${index + 1}.jpg`,
+    path: url,
+  }));
+
   try {
-    const res = await sendEmail(WORK_EMAIL, "New Application", html, [
-      { filename: "image.jpg", path: imageUrl },
-    ]);
+    const res = await sendEmail(
+      WORK_EMAIL,
+      "New Application",
+      html,
+      attachments
+    );
     return res;
   } catch {
     return false;
+  } finally {
+    const result = await cloudinary.api.delete_resources_by_prefix('qaf/')
+    console.log('Result of delition qaf: ', result)
   }
 };
