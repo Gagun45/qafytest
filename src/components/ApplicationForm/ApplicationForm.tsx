@@ -58,9 +58,6 @@ export default function ApplicationForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!overallSize) {
-      return;
-    }
     setIsPending(true);
     setStatus("");
 
