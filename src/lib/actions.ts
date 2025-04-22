@@ -60,7 +60,18 @@ export const register = async (email: string, password: string) => {
   }
 };
 
-const sendEmail = async (to: string, subject: string, html: string) => {
+interface AttachInterface {
+  filename: string;
+  path: string;
+  cid?: string;
+}
+
+const sendEmail = async (
+  to: string,
+  subject: string,
+  html: string,
+  attachments: AttachInterface[] = []
+) => {
   try {
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -74,6 +85,7 @@ const sendEmail = async (to: string, subject: string, html: string) => {
       to,
       subject,
       html,
+      attachments,
     });
     return true;
   } catch {
@@ -174,11 +186,13 @@ export const createApplication = async (formData: FormData) => {
   Contact: ${contact}<br>
   Device type: ${device}<br>
   Description: ${description}<br>
-  ${imageUrl&&`Image: ${imageUrl}`}
+  ${imageUrl && `<a href=${imageUrl}>Attachment url</a>`}
   `;
 
   try {
-    const res = await sendEmail(WORK_EMAIL, "New Application", html);
+    const res = await sendEmail(WORK_EMAIL, "New Application", html, [
+      { filename: "image.jpg", path: imageUrl },
+    ]);
     return res;
   } catch {
     return false;

@@ -3,15 +3,21 @@
 import React, { useRef, useState } from "react";
 import styles from "./ApplicationForm.module.css";
 import { createApplication } from "@/lib/actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import TextAreaAutosize from "react-textarea-autosize";
 
-export const MAX_FILE_SIZE_MB = 2;
+export const MAX_FILE_SIZE_MB = 10;
 
 export default function ApplicationForm() {
   const [status, setStatus] = useState("");
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState("");
+  const [filename, setFilename] = useState("");
+  const [url, setUrl] = useState("");
 
   const formRef = useRef<HTMLFormElement>(null);
+  const inputFileRef = useRef<HTMLInputElement>(null);
 
   const labelClass = "flex gap-2 relative";
   const labelTitle = "w-fit absolute -top-6";
@@ -35,9 +41,12 @@ export default function ApplicationForm() {
         setStatus(failed);
       }
       formRef.current?.reset();
-      setError('')
+      setError("");
+      setFilename("");
     } catch {
       setStatus(failed);
+    } finally {
+      setIsPending(false);
     }
   };
 
@@ -50,16 +59,29 @@ export default function ApplicationForm() {
     if (!file.type.startsWith("image/")) {
       setError("Please upload a valid image file");
       e.target.value = "";
+      setFilename("");
       return;
     }
     const fileSizeMB = file.size / (1024 * 1024);
     if (fileSizeMB > MAX_FILE_SIZE_MB) {
-      setError(`The image is too big (${fileSizeMB.toPrecision(2)}mb>2mb), please choose smaller one`);
+      setError(
+        `The image is too big (${fileSizeMB.toPrecision(
+          2
+        )}mb>2mb), please choose smaller one`
+      );
       e.target.value = "";
+      setFilename("");
       return;
-    } else {
-      setError("");
     }
+    const previewUrl = URL.createObjectURL(file);
+    setUrl(previewUrl);
+    setFilename(file.name);
+    setError("");
+  };
+
+  const handleCancelAttach = () => {
+    setFilename("");
+    inputFileRef.current!.value = "";
   };
 
   return (
@@ -98,22 +120,49 @@ export default function ApplicationForm() {
         </label>
         <label className={labelClass}>
           <span className={labelTitle}>Describe the problem</span>
-          <textarea required name="description" rows={3} />
+          <TextAreaAutosize
+            required
+            name="description"
+            minRows={3}
+            className="overflow-y-hidden"
+          />
         </label>
-        <div>
+        <div className="flex flex-col items-start">
+          <button
+            type="button"
+            className="flex bg-headfoot py-1 px-2 rounded-sm w-36 justify-center cursor-pointer"
+            onClick={() => inputFileRef.current?.click()}
+          >
+            {filename ? "Image attached" : "Attach an image"}
+          </button>
+          {filename && (
+            <div className="flex gap-2 flex-col">
+              <div className="flex items-center gap-2">
+                <span>{filename}</span>
+                <FontAwesomeIcon
+                  icon={faXmark}
+                  onClick={handleCancelAttach}
+                  className="cursor-pointer"
+                />
+              </div>
+              <img src={url} alt="Preview" className="max-w-44 max-h-60" />
+            </div>
+          )}
+
           <input
             type="file"
+            ref={inputFileRef}
             name="image"
             accept="image/*"
             onChange={handleFileChange}
-            multiple
+            className="hidden"
           />
           {error && (
             <span className="flex text-left text-red-600">{error}</span>
           )}
         </div>
-        <button className={styles.button}>
-          {isPending ? "Submitting" : "Submit"}
+        <button disabled={isPending} className={styles.button}>
+          {isPending ? "Submitting..." : "Submit"}
         </button>
       </form>
     </div>
