@@ -12,8 +12,8 @@ export default function RegisterForm() {
   const t = useTranslations("RegisterPage");
   const smthWentWrong = useTranslations("smthWentWrong");
   const emailTaken = t("emailTaken");
-  const minLength = t('minLenght')
-  const pwdMatch = t('pwdMatch')
+  const minLength = t("minLenght");
+  const pwdMatch = t("pwdMatch");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -100,6 +100,7 @@ export default function RegisterForm() {
       <h1 className="text-center font-bold text-2xl">{t("title")}</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <input
+          required
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -107,6 +108,7 @@ export default function RegisterForm() {
           name="email"
         />
         <input
+          required
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -123,7 +125,11 @@ export default function RegisterForm() {
         {emailIsTaken && <span>{emailIsTaken}</span>}
         {passwordError && <span>{passwordError}</span>}
         {response && <span>{response}</span>}
-        <button disabled={isDisabled || isPending || !email || !password || !passwordConfirm} className={styles.button}>
+        <button
+          disabled={
+            isDisabled || isPending }
+          className={styles.button}
+        >
           {isPending ? t("pending") : t("title")}
         </button>
         <div>

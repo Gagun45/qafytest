@@ -70,6 +70,7 @@ export default function Reset({ email }: { email: string }) {
       <h1 className="text-center font-bold text-2xl">{t("title")}</h1>
       <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
         <input
+          required
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

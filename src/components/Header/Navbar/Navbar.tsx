@@ -13,6 +13,7 @@ export default function Navbar() {
     { title: t("Home"), path: "/" },
     { title: t("WhyUs"), path: "/whyus" },
     { title: t("Services"), path: "/services" },
+    { title: t("Application"), path: "/application" },
   ];
   return (
     <div className="hidden sm:flex items-center gap-2 h-full">

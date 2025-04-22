@@ -53,6 +53,7 @@ export default function LoginForm() {
       <h1 className="text-center font-bold text-2xl">{t("title")}</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <input
+          required
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -60,6 +61,7 @@ export default function LoginForm() {
           name="email"
         />
         <input
+          required
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

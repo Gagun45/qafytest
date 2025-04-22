@@ -7,6 +7,8 @@ import { User } from "./models";
 import nodemailer from "nodemailer";
 import { getTranslations } from "next-intl/server";
 
+const WORK_EMAIL = "selyanchyn45@gmail.com";
+
 export const login = async (email: string, password: string) => {
   const t = await getTranslations("LoginPage");
   try {
@@ -119,5 +121,26 @@ export const resetPassword = async (email: string, password: string) => {
     return "Success";
   } catch {
     return "Something went wrong";
+  }
+};
+
+export const createApplication = async (formData: FormData) => {
+  const name = formData.get("name") as string;
+  const contact = formData.get("contact") as string;
+  const device = formData.get("device") as string;
+  const description = formData.get("description") as string;
+
+  const html = `New application has been submitted!<br>
+  From: ${name}<br>
+  Contact: ${contact}<br>
+  Device type: ${device}<br>
+  Description: ${description}<br>
+  `;
+
+  try {
+    const res = await sendEmail(WORK_EMAIL, "New Application", html);
+    return res;
+  } catch {
+    return false;
   }
 };

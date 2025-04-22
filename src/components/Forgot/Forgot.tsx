@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 export default function Forgot() {
   const t = useTranslations("ForgotPage");
   const smthWentWrong = useTranslations("smthWentWrong");
-  const noUser = t('noUser')
+  const noUser = t("noUser");
   const [email, setEmail] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
   const [status, setStatus] = useState("");
@@ -25,8 +25,8 @@ export default function Forgot() {
       if (res === "Success") {
         setIsSend(true);
       }
-      if (res === 'No user exists with such email') {
-        setStatus(noUser)
+      if (res === "No user exists with such email") {
+        setStatus(noUser);
       }
     } catch {
       setStatus(smthWentWrong);
@@ -49,6 +49,7 @@ export default function Forgot() {
       <h1 className="text-center font-bold text-2xl">{t("title")}</h1>
       <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
         <input
+          required
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}

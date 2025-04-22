@@ -17,6 +17,7 @@ export default function MobileNavbar() {
     { title: t("Home"), path: "/" },
     { title: t("WhyUs"), path: "/whyus" },
     { title: t("Services"), path: "/services" },
+    { title: t("Application"), path: "/application" },
   ];
 
   return (
@@ -46,8 +47,11 @@ export default function MobileNavbar() {
             />
           )}
           {session && (
-            <button className="navLink w-full rounded-none h-12" onClick={() => signOut()}>
-              {t('Logout')}
+            <button
+              className="navLink w-full rounded-none h-12"
+              onClick={() => signOut()}
+            >
+              {t("Logout")}
             </button>
           )}
           <Theme />
