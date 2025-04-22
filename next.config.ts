@@ -3,11 +3,16 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['res.cloudinary.com']
+    domains: ["res.cloudinary.com"],
   },
   env: {
-    CLOUDINARY_URL: process.env.CLOUDINARY_URL
-  }
+    CLOUDINARY_URL: process.env.CLOUDINARY_URL,
+  },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
+  },
 };
 
 const withNextIntl = createNextIntlPlugin();

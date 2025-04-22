@@ -6,6 +6,7 @@ import crypto from "crypto";
 import { User } from "./models";
 import nodemailer from "nodemailer";
 import { getTranslations } from "next-intl/server";
+import { v2 as cloudinary, type UploadApiResponse } from "cloudinary";
 
 const WORK_EMAIL = "selyanchyn45@gmail.com";
 
@@ -124,17 +125,56 @@ export const resetPassword = async (email: string, password: string) => {
   }
 };
 
+const imageUpload = async (image: File): Promise<UploadApiResponse> => {
+  if (!image) throw new Error("No image");
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+  });
+
+  const arrayBuffer = await image.arrayBuffer();
+  const buffer = new Uint8Array(arrayBuffer);
+
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader
+      .upload_stream(
+        { resource_type: "image", folder: "qaf" },
+        (error, result) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+          resolve(result as UploadApiResponse);
+        }
+      )
+      .end(buffer);
+  });
+};
+
 export const createApplication = async (formData: FormData) => {
   const name = formData.get("name") as string;
   const contact = formData.get("contact") as string;
   const device = formData.get("device") as string;
   const description = formData.get("description") as string;
 
+  const image = formData.get("image") as File;
+
+  let imageUrl = "";
+
+  try {
+    const res = await imageUpload(image);
+    imageUrl = res.secure_url;
+  } catch {
+    console.log("No image provided");
+  }
+
   const html = `New application has been submitted!<br>
   From: ${name}<br>
   Contact: ${contact}<br>
   Device type: ${device}<br>
   Description: ${description}<br>
+  ${imageUrl&&`Image: ${imageUrl}`}
   `;
 
   try {

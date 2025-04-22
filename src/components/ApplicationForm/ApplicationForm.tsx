@@ -1,16 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./ApplicationForm.module.css";
 import { createApplication } from "@/lib/actions";
 
+export const MAX_FILE_SIZE_MB = 2;
+
 export default function ApplicationForm() {
-  const [name, setName] = useState("");
-  const [contact, setContact] = useState("");
-  const [device, setDevice] = useState("");
-  const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
   const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState("");
+
+  const formRef = useRef<HTMLFormElement>(null);
 
   const labelClass = "flex gap-2 relative";
   const labelTitle = "w-fit absolute -top-6";
@@ -20,84 +21,98 @@ export default function ApplicationForm() {
   const failed =
     "Something went wrong, application has NOT been submitted, try later";
 
-  const resetForm = () => {
-    setName("");
-    setContact("");
-    setDevice("");
-    setDescription("");
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setIsPending(true);
     setStatus("");
-    e.preventDefault();
+
     const formData = new FormData(e.currentTarget);
-    const res = await createApplication(formData);
-    if (res) {
-      setStatus(success);
-    } else {
+    try {
+      const res = await createApplication(formData);
+      if (res) {
+        setStatus(success);
+      } else {
+        setStatus(failed);
+      }
+      formRef.current?.reset();
+      setError('')
+    } catch {
       setStatus(failed);
     }
-    resetForm();
-    setIsPending(false);
   };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) {
+      setError("");
+      return;
+    }
+    if (!file.type.startsWith("image/")) {
+      setError("Please upload a valid image file");
+      e.target.value = "";
+      return;
+    }
+    const fileSizeMB = file.size / (1024 * 1024);
+    if (fileSizeMB > MAX_FILE_SIZE_MB) {
+      setError(`The image is too big (${fileSizeMB.toPrecision(2)}mb>2mb), please choose smaller one`);
+      e.target.value = "";
+      return;
+    } else {
+      setError("");
+    }
+  };
+
   return (
     <div className="w-4/5 max-w-[550px] flex flex-col gap-[30px]">
       <div className="flex flex-col gap-1 text-center">
         <h1 className="font-bold text-2xl">Application</h1>
         <h2>Create application and we will contact you</h2>
-        {status && <span className={status===success ? 'text-green-700' : 'text-red-600'}>{status}</span>}
+        {status && (
+          <span
+            className={status === success ? "text-green-700" : "text-red-600"}
+          >
+            {status}
+          </span>
+        )}
       </div>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit} ref={formRef}>
         <label className={labelClass}>
           <span className={labelTitle}>Your Name</span>
-          <input
-            required
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            name="name"
-          />
+          <input required type="text" name="name" />
         </label>
         <label className={labelClass}>
-          <text className={labelTitle}>
+          <div className={labelTitle}>
             Contacts{" "}
             <span className="inline text-xs">
               (phone, telegram, whatsapp or any other)
             </span>
-          </text>
-          <input
-            required
-            type="text"
-            value={contact}
-            onChange={(e) => setContact(e.target.value)}
-            name="contact"
-          />
+          </div>
+          <input required type="text" name="contact" />
         </label>
         <label className={labelClass}>
-          <text className={labelTitle}>
+          <div className={labelTitle}>
             Device type{" "}
             <span className="text-xs">(smartphone, laptop, PC, etc.)</span>
-          </text>
-          <input
-            required
-            type="text"
-            value={device}
-            onChange={(e) => setDevice(e.target.value)}
-            name="device"
-          />
+          </div>
+          <input required type="text" name="device" />
         </label>
         <label className={labelClass}>
           <span className={labelTitle}>Describe the problem</span>
-          <textarea
-            required
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            name="description"
-            rows={5}
-          />
+          <textarea required name="description" rows={3} />
         </label>
-        <button disabled={isPending} className={styles.button}>
+        <div>
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleFileChange}
+            multiple
+          />
+          {error && (
+            <span className="flex text-left text-red-600">{error}</span>
+          )}
+        </div>
+        <button className={styles.button}>
           {isPending ? "Submitting" : "Submit"}
         </button>
       </form>
