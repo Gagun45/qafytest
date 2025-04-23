@@ -32,20 +32,19 @@
     "google": "Login via Google",
     "pending": "Logging in...",
     "wrongEmail": "Wrong email",
-    "wrongPassword": "Wrong password"
+    "wrongPassword": "Wrong password",
+    "PASSWORD_LENGTH_WARNING": "Password must be 8-24 symbols long"
   },
   "RegisterPage": {
     "title": "Register",
+    "subtitle": "Enter your email address to which a link for verification and password setting will be sent",
     "email": "Email",
-    "password": "Password",
-    "passwordRepeat": "Password repeat",
     "alreadyAcc": "Already have an account?",
     "login": "Login",
     "google": "Login via Google",
     "pending": "Registering...",
     "emailTaken": "The email is already taken",
-    "minLenght": "Password must be at least 8 symbols long",
-    "pwdMatch": "Passwords dont match"
+    "success": "Link sent successfully, redirecting to the login page.."
   },
   "ForgotPage": {
     "title": "Forgot password",
@@ -61,11 +60,11 @@
     "title": "Reset password",
     "newPwd": "New password",
     "setNew": "Set new password",
-    "minLenght": "Password must be at least 8 symbols long",
     "pending": "Applying...",
     "success": "New password has been successfully set",
     "redirect": "You will be redirected to login page in {countdown} seconds",
-    "goToLogin": "Go to Login page"
+    "goToLogin": "Go to Login page",
+    "PASSWORD_LENGTH_WARNING": "Password must be 8-24 symbols long"
   },
   "ServicesPage": {
     "title": "Our services",

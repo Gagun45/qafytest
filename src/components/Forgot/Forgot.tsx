@@ -46,7 +46,7 @@ export default function Forgot() {
 
   return (
     <div className="w-full max-w-[325px] flex flex-col gap-[30px]">
-      <h1 className="text-center font-bold text-2xl">{t("title")}</h1>
+      <h1 className="text-center text-4xl md:text-6xl">{t("title")}</h1>
       <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
         <input
           required

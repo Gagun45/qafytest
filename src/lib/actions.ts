@@ -41,7 +41,7 @@ export const login = async (email: string, password: string) => {
   }
 };
 
-export const register = async (email: string, password: string) => {
+export const register = async (email: string) => {
   try {
     await connectToDb();
 
@@ -51,10 +51,18 @@ export const register = async (email: string, password: string) => {
       return { error: "Email already taken" };
     }
 
+    const newToken = crypto.randomBytes(32).toString("hex");
+    const expiryDate = new Date(Date.now() + 3600000)
     await User.create({
       email,
-      password,
+      password: crypto.randomUUID().slice(0, 8).toUpperCase(),
+      resetPasswordToken: newToken,
+      resetPasswordTokenExpiry: expiryDate,
     });
+    const subject = "Set your password";
+    const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL}/reset-password/${newToken}`;
+    const html = `Click <a href="${resetUrl}">here </a> to set your password`;
+    await sendEmail(email, subject, html);
     return { success: true };
   } catch {
     return { error: "Something went wrong, try later" };
@@ -100,8 +108,9 @@ export const forgotPassword = async (email: string) => {
     const user = await User.findOne({ email });
     if (!user) return "No user exists with such email";
     const newToken = crypto.randomBytes(32).toString("hex");
+    const expiryDate = new Date(Date.now() + 3600000)
     user.resetPasswordToken = newToken;
-    user.resetPasswordTokenExpiry = new Date(Date.now() + 3600000);
+    user.resetPasswordTokenExpiry = expiryDate;
     await user.save();
 
     const subject = "Reset your password";
@@ -174,9 +183,10 @@ export const createApplication = async (
       sum + parseFloat((image.file.size / (1024 * 1024)).toFixed(2)),
     0
   );
-  if (newSize>8) { //NEXT.CONFIG.TS BODYSIZE LIMIT
-    return false
-  } 
+  if (newSize > 8) {
+    //NEXT.CONFIG.TS BODYSIZE LIMIT
+    return false;
+  }
   const name = formData.get("name") as string;
   const contact = formData.get("contact") as string;
   const device = formData.get("device") as string;
@@ -217,7 +227,7 @@ export const createApplication = async (
   } catch {
     return false;
   } finally {
-    const result = await cloudinary.api.delete_resources_by_prefix('qaf/')
-    console.log('Result of delition qaf: ', result)
+    const result = await cloudinary.api.delete_resources_by_prefix("qaf/");
+    console.log("Result of delition qaf: ", result);
   }
 };

@@ -12,84 +12,55 @@ export default function RegisterForm() {
   const t = useTranslations("RegisterPage");
   const smthWentWrong = useTranslations("smthWentWrong");
   const emailTaken = t("emailTaken");
-  const minLength = t("minLenght");
-  const pwdMatch = t("pwdMatch");
+
+  const successMessage = t("success");
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-
-  const [passwordError, setPasswordError] = useState("");
 
   const [response, setResponse] = useState("");
 
-  const [emailIsTaken, setEmailIsTaken] = useState("");
+  const [beingSend, setBeingSend] = useState(false);
+
+  const [error, setError] = useState("");
+
+  const [success, setSuccess] = useState("");
 
   const [isPending, setIsPending] = useState(false);
 
-  const [isDisabled, setIsDisabled] = useState(true);
-
   const router = useRouter();
-  const passwordValidation = () => {
-    if (password.length > 24) {
-      setPassword(password.slice(0, 25));
-    }
-
-    if (passwordConfirm.length > 24) {
-      setPasswordConfirm(passwordConfirm.slice(0, 25));
-    }
-    if (password === passwordConfirm) {
-      setPasswordError("");
-      setIsDisabled(false);
-    }
-    if (password && passwordConfirm && password !== passwordConfirm) {
-      setPasswordError(pwdMatch);
-      setIsDisabled(true);
-    }
-    if (!password || !passwordConfirm) {
-      setPasswordError("");
-    }
-    if (password && password.length < 8) {
-      setPasswordError(minLength);
-      setIsDisabled(true);
-    }
-  };
 
   useEffect(() => {
-    passwordValidation();
-  }, [password, passwordConfirm]);
-  useEffect(() => {
-    setEmailIsTaken("");
+    setError("");
   }, [email]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     try {
       setIsPending(true);
-      setEmailIsTaken("");
-      setPasswordError("");
+      setError("");
       e.preventDefault();
-      if (password !== passwordConfirm) return;
-      const result = await register(email, password);
+      const result = await register(email);
       if (result.error) {
         if (result.error === "Email already taken") {
-          setPassword("");
-          setPasswordConfirm("");
-          setEmailIsTaken(emailTaken);
+          setError(emailTaken);
         } else {
           setResponse(result.error);
         }
       }
       if (result.success) {
-        router.push("/login");
+        setError("");
+        setSuccess(successMessage);
+        setIsPending(true);
+        setBeingSend(true);
+        setTimeout(() => {
+          router.push("/login");
+        }, 3000);
       }
     } catch {
-      setEmailIsTaken("");
+      setError("");
       setEmail("");
-      setPassword("");
-      setPasswordConfirm("");
-      setPasswordError("");
-      setIsDisabled(true);
+      setSuccess("");
       setResponse(smthWentWrong);
+      setIsPending(false);
     } finally {
       setIsPending(false);
     }
@@ -97,7 +68,10 @@ export default function RegisterForm() {
 
   return (
     <div className="w-4/5 max-w-[325px] flex flex-col gap-[30px]">
-      <h1 className="text-center font-bold text-2xl">{t("title")}</h1>
+      <div className="flex flex-col gap-1 text-center">
+        <h1 className="text-center text-4xl md:text-6xl">{t("title")}</h1>
+        <h2 className="text-sm md:text-base">{t("subtitle")}</h2>
+      </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <input
           required
@@ -107,27 +81,11 @@ export default function RegisterForm() {
           placeholder={t("email")}
           name="email"
         />
-        <input
-          required
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder={t("password")}
-          name="password"
-        />
-        <input
-          type="password"
-          value={passwordConfirm}
-          onChange={(e) => setPasswordConfirm(e.target.value)}
-          placeholder={t("passwordRepeat")}
-          name="passwordConfirm"
-        />
-        {emailIsTaken && <span>{emailIsTaken}</span>}
-        {passwordError && <span>{passwordError}</span>}
+        {error && <span>{error}</span>}
+        {success && <span>{success}</span>}
         {response && <span>{response}</span>}
         <button
-          disabled={
-            isDisabled || isPending }
+          disabled={!email || beingSend || isPending}
           className={styles.button}
         >
           {isPending ? t("pending") : t("title")}
@@ -140,7 +98,7 @@ export default function RegisterForm() {
         </div>
       </form>
       <button
-        disabled={isPending}
+        disabled={isPending || beingSend}
         className={styles.button}
         onClick={() => signIn("google", { callbackUrl: "/" })}
       >

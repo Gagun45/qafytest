@@ -13,40 +13,18 @@ export default function Reset({ email }: { email: string }) {
 
   const smthWentWrong = useTranslations("smthWentWrong");
 
-  const [isDisabled, setIsDisabled] = useState(true);
-
   const [isPassSet, setIsPassSet] = useState(false);
 
   const [error, setError] = useState("");
 
   const [isPending, setIsPending] = useState(false);
 
-  const passwordValidation = () => {
-    if (password.length > 24) {
-      setPassword(password.slice(0, 25));
-    }
-
-    if (!password) {
-      setError("");
-    }
-    if (password && password.length < 8) {
-      setError("Password must be at least 8 symbols long");
-    }
-    if (password && password.length > 7 && password.length < 24) {
-      setError("");
-    }
-  };
+  const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
-    passwordValidation();
-    if (!password) setIsDisabled(true);
+    const disabled = !password || password.length < 8 || password.length > 24;
+    setIsDisabled(disabled);
   }, [password]);
-
-  useEffect(() => {
-    if (!password) setIsDisabled(true);
-    else if (error) setIsDisabled(true);
-    else setIsDisabled(false);
-  }, [error, password]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     try {
@@ -67,16 +45,31 @@ export default function Reset({ email }: { email: string }) {
   }
   return (
     <div className="w-full max-w-[325px] flex flex-col gap-[30px]">
-      <h1 className="text-center font-bold text-2xl">{t("title")}</h1>
+      <h1 className="text-center text-4xl md:text-6xl">{t("title")}</h1>
       <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
-        <input
-          required
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder={t("newPwd")}
-          name="password"
-        />
+        <div className="relative">
+          <input
+            required
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder={t("newPwd")}
+            name="password"
+          />
+          {password && (
+            <span
+              className={`${
+                password && (password.length < 8 || password.length > 24)
+                  ? "text-red-600"
+                  : "text-green-700"
+              } ${
+                password ? "" : "text-text"
+              } absolute bottom-0 translate-y-full left-0 text-xs`}
+            >
+              {t("PASSWORD_LENGTH_WARNING")}
+            </span>
+          )}
+        </div>
         {error && <span>{error}</span>}
         <button disabled={isDisabled || isPending} className={styles.button}>
           {isPending ? t("pending") : t("setNew")}
