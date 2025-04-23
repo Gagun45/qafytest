@@ -1,3 +1,4 @@
+import { Link } from "@/i18n/navigation";
 import {
   faCheckDouble,
   faContactBook,
@@ -39,7 +40,12 @@ export default function WhyUsPage() {
   return (
     <main className="flex">
       <section className="flex flex-col gap-6 sm:gap-12 xl:gap-9 2xl:gap-12 lg:w-2/3">
-        <h1 className="pageTitle">{t("title")}</h1>
+        <div className="flex flex-col text-center">
+          <h1 className="text-4xl md:text-6xl">{t("title")}</h1>
+          <Link href={"/application"} className="underline">
+            (Залишити заявку)
+          </Link>
+        </div>
         <div className="flex flex-col gap-10 md:gap-12">
           {ROWS.map(({ text, Component }) => (
             <div

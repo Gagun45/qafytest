@@ -6,6 +6,7 @@ import { createApplication } from "@/lib/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import TextAreaAutosize from "react-textarea-autosize";
+import { Link } from "@/i18n/navigation";
 
 export const MAX_FILE_SIZE_MB = 8;
 
@@ -37,7 +38,9 @@ export default function ApplicationForm() {
     if (overallSize > MAX_FILE_SIZE_MB) {
       setIsDisabled(true);
       setError(
-        `Overall size of attached images is bigger (${overallSize.toPrecision(2)}mb) than limit (${MAX_FILE_SIZE_MB}mb)`
+        `Overall size of attached images is bigger (${overallSize.toPrecision(
+          2
+        )}mb) than limit (${MAX_FILE_SIZE_MB}mb)`
       );
     } else {
       setIsDisabled(false);
@@ -74,7 +77,7 @@ export default function ApplicationForm() {
     } catch {
       setStatus(failed);
     } finally {
-      setFiles([])
+      setFiles([]);
       setIsPending(false);
     }
   };
@@ -103,8 +106,9 @@ export default function ApplicationForm() {
   return (
     <div className="w-4/5 max-w-[550px] flex flex-col gap-[30px]">
       <div className="flex flex-col gap-1 text-center">
-        <h1 className="font-bold text-2xl">Application</h1>
-        <h2>Create application and we will contact you</h2>
+        <h1 className="text-center text-4xl md:text-6xl">Application</h1>
+        <h2>Create an application and we will contact you</h2>
+        <h3 className="underline"><Link href='/how'>How it works?</Link></h3>
         {status && (
           <span
             className={status === success ? "text-green-700" : "text-red-600"}

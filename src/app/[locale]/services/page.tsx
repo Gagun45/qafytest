@@ -1,3 +1,4 @@
+import { Link } from "@/i18n/navigation";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
@@ -18,8 +19,11 @@ export default function ServicesPage() {
   return (
     <main className="flex">
       <section className="flex flex-col w-full gap-6 sm:gap-12 xl:gap-9 2xl:gap-12 lg:w-2/3">
-        <h1 className="text-center text-4xl md:text-6xl">{t("title")}</h1>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col text-center">
+          <h1 className="text-4xl md:text-6xl">{t("title")}</h1>
+          <Link href={"/application"} className="underline">(Залишити заявку)</Link>
+        </div>
+        <div className="flex flex-col gap-3 sm:gap-4">
           {SERVICES.map((service) => (
             <div key={service} className="flex items-center gap-4">
               <FontAwesomeIcon
