@@ -5,11 +5,13 @@ import { User } from "@/lib/models";
 import { getTranslations } from "next-intl/server";
 
 interface Props {
-  searchParams: { token?: string };
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export default async function ResetPage({ searchParams }: Props) {
-  const token = searchParams.token;
+  const token = (await searchParams)?.token;
+
+  console.log('tokenL ', token)
 
   const t = await getTranslations("ResetPage");
 
