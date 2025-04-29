@@ -37,7 +37,7 @@
   }
 
   main {
-    @apply w-[100vw] min-h-[var(--mainH)] flex justify-center bg-main pt-4 px-4 sm:px-8 md:px-16 lg:px-32 2xl:px-48
+    @apply w-[100vw] min-h-[var(--mainH)] flex justify-center bg-main pt-4 px-4 sm:px-8 md:px-16 2xl:px-48
   }
 
   header {
@@ -55,7 +55,7 @@
 
 @layer components {
   .resPadding {
-    @apply px-4 sm:px-8 md:px-16 lg:px-32 2xl:px-48
+    @apply px-4 sm:px-8 md:px-16 2xl:px-48
   }
 
   .heroDiv {

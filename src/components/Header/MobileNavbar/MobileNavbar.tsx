@@ -19,10 +19,11 @@ export default function MobileNavbar() {
     { title: t("Home"), path: "/" },
     { title: t("Services"), path: "/services" },
     { title: t("Application"), path: "/application" },
+    { title: t("Contacts"), path: "/contacts" },
   ];
 
   return (
-    <div className="flex md:hidden items-center z-40">
+    <div className="flex lg:hidden items-center z-40">
       <div
         className="flex flex-col h-6 gap-1.5 cursor-pointer z-0"
         onClick={() => setOpen((prev) => !prev)}

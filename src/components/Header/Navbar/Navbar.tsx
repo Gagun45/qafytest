@@ -13,9 +13,10 @@ export default function Navbar() {
     { title: t("Home"), path: "/" },
     { title: t("Services"), path: "/services" },
     { title: t("Application"), path: "/application" },
+    { title: t("Contacts"), path: "/contacts" },
   ];
   return (
-    <div className="hidden sm:flex items-center gap-2 h-full">
+    <div className="flex items-center gap-2 h-full">
       {LINKS.map((link) => (
         <NavLink key={link.path} link={link} />
       ))}

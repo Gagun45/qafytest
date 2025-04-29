@@ -8,7 +8,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import TextAreaAutosize from "react-textarea-autosize";
 import { Link } from "@/i18n/navigation";
 
-export const MAX_FILE_SIZE_MB = 8;
+export const MAX_FILE_SIZE_MB = 8; //NEXT CONFIG TS VALUE
 
 export type ImageType = {
   file: File;
@@ -88,6 +88,12 @@ export default function ApplicationForm() {
       setError("");
       return;
     }
+
+    if (files.some((item) => item.file.name === file.name)) {
+      setError("Already added");
+      return;
+    }
+
     if (!file.type.startsWith("image/")) {
       setError("Please upload a valid image file");
       e.target.value = "";
@@ -108,7 +114,9 @@ export default function ApplicationForm() {
       <div className="mainHeading gap-2">
         <h1 className="pageTitle">Application</h1>
         <h2>Create an application and we will contact you</h2>
-        <h3 className="underline"><Link href='/how'>How it works?</Link></h3>
+        <h3 className="underline">
+          <Link href="/how">How it works?</Link>
+        </h3>
         {status && (
           <span
             className={status === success ? "text-green-700" : "text-red-600"}
@@ -153,12 +161,12 @@ export default function ApplicationForm() {
             className="flex bg-headfoot py-1 px-2 rounded-sm w-36 justify-center cursor-pointer"
             onClick={() => inputFileRef.current?.click()}
           >
-            {files.length > 0 ? "Image attached" : "Attach an image"}
+            {files.length > 0 ? "Image added" : "Add an image"}
           </button>
           {files && (
             <div className="flex flex-wrap gap-3">
               {files.map((image) => (
-                <div key={image.url} className="flex flex-col gap-1">
+                <div key={image.url} className="flex mt-2 flex-col gap-1">
                   <div className="flex items-center gap-2">
                     <span>{image.file.name}</span>
                     <FontAwesomeIcon

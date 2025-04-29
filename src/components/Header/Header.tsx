@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <header className="resPadding relative flex items-center justify-between">
       {/*  DESKTOP */}
-      <div className="hidden md:flex w-full h-full justify-between items-center">
+      <div className="hidden lg:flex w-full h-full justify-between items-center">
         <Logo />
         <div className="flex items-center gap-4">
           <Navbar />
@@ -19,7 +19,7 @@ export default function Header() {
       </div>
 
       {/* MOBILE */}
-      <div className="flex md:hidden justify-between items-center w-full">
+      <div className="flex lg:hidden justify-between items-center w-full">
         <Logo />
         <div className="flex items-center gap-4">
           <Theme />

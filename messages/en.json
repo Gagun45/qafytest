@@ -12,7 +12,8 @@
     "Services": "Services",
     "Application": "Application",
     "Login": "Login",
-    "Logout": "Logout"
+    "Logout": "Logout",
+    "Contacts": "Contacts"
   },
   "WhyUsPage": {
     "title": "Why choose us?",
