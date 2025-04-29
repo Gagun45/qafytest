@@ -1,5 +1,9 @@
 import { Link } from "@/i18n/navigation";
-import { faArrowDownLong, faCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowDown,
+  faArrowDownLong,
+  faCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function HowPage() {
@@ -12,10 +16,13 @@ export default function HowPage() {
   ];
 
   return (
-    <main className="flex justify-center">
-      <div className="w-full max-w-[750px] flex flex-col items-center gap-[30px]">
-        <h1 className="text-center text-4xl md:text-6xl">🧾 Як це працює?</h1>
-        <div className="flex md:text-lg w-full max-w-[320px] flex-col gap-6 md:gap-4">
+    <main>
+      <section>
+        <div className="mainHeading">
+          <h1 className="pageTitle">🧾 Як це працює?</h1>
+        </div>
+
+        <div className="heroDiv">
           <div className="flex flex-col gap-4">
             <div className="flex gap-4 items-center">
               <FontAwesomeIcon icon={faCircle} />
@@ -33,12 +40,12 @@ export default function HowPage() {
                 <span>{row}</span>
               </div>
               {index !== ROWS.length - 1 && (
-                <FontAwesomeIcon icon={faArrowDownLong} />
+                <FontAwesomeIcon icon={faArrowDown} />
               )}
             </div>
           ))}
         </div>
-      </div>
+      </section>
     </main>
   );
 }

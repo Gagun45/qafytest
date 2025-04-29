@@ -104,9 +104,9 @@ export default function ApplicationForm() {
   };
 
   return (
-    <div className="w-4/5 max-w-[550px] flex flex-col gap-[30px]">
-      <div className="flex flex-col gap-1 text-center">
-        <h1 className="text-center text-4xl md:text-6xl">Application</h1>
+    <section>
+      <div className="mainHeading gap-2">
+        <h1 className="pageTitle">Application</h1>
         <h2>Create an application and we will contact you</h2>
         <h3 className="underline"><Link href='/how'>How it works?</Link></h3>
         {status && (
@@ -195,6 +195,6 @@ export default function ApplicationForm() {
           {isPending ? "Submitting..." : "Submit"}
         </button>
       </form>
-    </div>
+    </section>
   );
 }

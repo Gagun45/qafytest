@@ -9,7 +9,6 @@ import {
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 
 const tClass = "text-4xl lg:text-6xl w-16 shrink-0";
 
@@ -38,29 +37,24 @@ export default function WhyUsPage() {
     },
   ];
   return (
-    <main className="flex">
-      <section className="flex flex-col gap-6 sm:gap-12 xl:gap-9 2xl:gap-12 lg:w-2/3">
-        <div className="flex flex-col text-center">
-          <h1 className="text-4xl md:text-6xl">{t("title")}</h1>
+    <main>
+      <section>
+        <div className="mainHeading gap-0">
+          <h1 className="pageTitle">{t("title")}</h1>
           <Link href={"/application"} className="underline">
             (Залишити заявку)
           </Link>
         </div>
-        <div className="flex flex-col gap-10 md:gap-12">
+        <div className="heroDiv">
           {ROWS.map(({ text, Component }) => (
             <div
               key={text}
-              className="flex items-center gap-4 text-lg sm:text-2xl"
+              className="flex items-center gap-4"
             >
               {Component}
               <p>{text}</p>
             </div>
           ))}
-        </div>
-      </section>
-      <section className="hidden lg:flex items-center w-1/3">
-        <div className="relative w-full max-w-[475px] aspect-square">
-          <Image src={"/whyus.png"} alt="" fill />
         </div>
       </section>
     </main>

@@ -114,7 +114,7 @@ export const forgotPassword = async (email: string) => {
     await user.save();
 
     const subject = "Reset your password";
-    const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL}/reset-password/${newToken}`;
+    const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL}/reset-password?token=${newToken}`;
     const html = `Click <a href="${resetUrl}">here </a> to reset your password`;
 
     try {

@@ -30,15 +30,12 @@ export default function Rssuccess() {
   }, [countdown]);
 
   return (
-    <div className="text-xl lg:text-4xl lg:gap-20 flex flex-col justify-center gap-12">
+    <section className="items-start text-2xl md:text-4xl gap-24">
       <p>{t("success")}</p>
       <p>{t("redirect", { countdown })}</p>
-      <Link
-        href="/login"
-        className="underline lg:text-5xl text-2xl underline-offset-2"
-      >
-        {t('goToLogin')}
+      <Link href="/login" className="underline underline-offset-2">
+        {t("goToLogin")}
       </Link>{" "}
-    </div>
+    </section>
   );
 }

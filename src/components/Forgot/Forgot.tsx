@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./Forgot.module.css";
+import styles from "../Forms.module.css";
 import { forgotPassword } from "@/lib/actions";
 import Fgsuccess from "./Fgsuccess";
 import { useTranslations } from "next-intl";
@@ -45,8 +45,10 @@ export default function Forgot() {
   }
 
   return (
-    <div className="w-full max-w-[325px] flex flex-col gap-[30px]">
-      <h1 className="text-center text-4xl md:text-6xl">{t("title")}</h1>
+    <section>
+      <div className="mainHeading">
+        <h1 className="pageTitle">{t("title")}</h1>
+      </div>
       <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
         <input
           required
@@ -61,6 +63,6 @@ export default function Forgot() {
         </button>
         <span>{status}</span>
       </form>
-    </div>
+    </section>
   );
 }

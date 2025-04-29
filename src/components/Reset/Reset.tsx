@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./Reset.module.css";
+import styles from "../Forms.module.css";
 import { resetPassword } from "@/lib/actions";
 import Rssuccess from "./Rssuccess";
 import { useTranslations } from "next-intl";
@@ -44,8 +44,10 @@ export default function Reset({ email }: { email: string }) {
     return <Rssuccess />;
   }
   return (
-    <div className="w-full max-w-[325px] flex flex-col gap-[30px]">
-      <h1 className="text-center text-4xl md:text-6xl">{t("title")}</h1>
+    <section>
+      <div className="mainHeading">
+        <h1 className="pageTitle">{t("title")}</h1>
+      </div>
       <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
         <div className="relative">
           <input
@@ -75,6 +77,6 @@ export default function Reset({ email }: { email: string }) {
           {isPending ? t("pending") : t("setNew")}
         </button>
       </form>
-    </div>
+    </section>
   );
 }

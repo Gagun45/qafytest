@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./RegisterForm.module.css";
+import styles from "../Forms.module.css";
 import React, { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -67,12 +67,12 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="w-4/5 max-w-[325px] flex flex-col gap-[30px]">
-      <div className="flex flex-col gap-1 text-center">
-        <h1 className="text-center text-4xl md:text-6xl">{t("title")}</h1>
-        <h2 className="text-sm md:text-base">{t("subtitle")}</h2>
+    <section>
+      <div className="mainHeading">
+        <h1 className="pageTitle">{t("title")}</h1>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
+        <h2 className="text-center">{t("subtitle")}</h2>
         <input
           required
           type="email"
@@ -96,14 +96,15 @@ export default function RegisterForm() {
             <b>{t("login")}</b>
           </Link>
         </div>
+        <button
+          type="button"
+          disabled={isPending || beingSend}
+          className={styles.button}
+          onClick={() => signIn("google", { callbackUrl: "/" })}
+        >
+          {t("google")}
+        </button>
       </form>
-      <button
-        disabled={isPending || beingSend}
-        className={styles.button}
-        onClick={() => signIn("google", { callbackUrl: "/" })}
-      >
-        {t("google")}
-      </button>
-    </div>
+    </section>
   );
 }

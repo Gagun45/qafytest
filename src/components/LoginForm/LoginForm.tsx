@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./LoginForm.module.css";
+import styles from "../Forms.module.css";
 import React, { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { login } from "@/lib/actions";
@@ -48,8 +48,10 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="w-4/5 max-w-[325px] flex flex-col gap-[30px]">
-      <h1 className="text-center text-4xl md:text-6xl">{t("title")}</h1>
+    <section>
+      <div className="mainHeading">
+        <h1 className="pageTitle">{t("title")}</h1>
+      </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <input
           required
@@ -84,7 +86,11 @@ export default function LoginForm() {
         </div>
 
         {error && <span>{error}</span>}
-        <button disabled={isDisabled || isPending} className={styles.button}>
+        <button
+          type="submit"
+          disabled={isDisabled || isPending}
+          className={styles.button}
+        >
           {isPending ? t("pending") : t("title")}
         </button>
         <div>
@@ -101,14 +107,15 @@ export default function LoginForm() {
             <b>{t("forgot")}</b>
           </Link>
         </div>
+        <button
+          type="button"
+          disabled={isPending}
+          className={styles.button}
+          onClick={() => signIn("google", { callbackUrl: "/" })}
+        >
+          {t("google")}
+        </button>
       </form>
-      <button
-        disabled={isPending}
-        className={styles.button}
-        onClick={() => signIn("google", { callbackUrl: "/" })}
-      >
-        {t("google")}
-      </button>
-    </div>
+    </section>
   );
 }
