@@ -15,6 +15,8 @@ export default function MobileNavbar() {
   const { data: session } = useSession();
 
   const t = useTranslations("NavBarLinks");
+  const profileLink = { title: t("Profile"), path: "/profile" };
+  const loginLink = { title: t("Login"), path: "/login" };
   const LINKS: LinkInterface[] = [
     { title: t("Home"), path: "/" },
     { title: t("Services"), path: "/services" },
@@ -24,21 +26,23 @@ export default function MobileNavbar() {
 
   return (
     <div className="flex lg:hidden items-center z-40">
-      <div
-        className="flex flex-col h-6 gap-1.5 cursor-pointer z-0"
-        onClick={() => setOpen((prev) => !prev)}
-      >
-        <div className="h-1 bg-text w-10 rounded-full"></div>
-        <div className="h-1 bg-text w-10 rounded-full"></div>
-        <div className="h-1 bg-text w-10 rounded-full"></div>
-      </div>
-      {open && (
+      {open ? (
         <FontAwesomeIcon
           icon={faXmark}
-          className="text-5xl z-50 fixed top-8 right-5 cursor-pointer"
+          className="text-5xl z-50 fixed top-8 right-4 sm:right-8 md:right-16 cursor-pointer"
           onClick={() => setOpen((prev) => !prev)}
         />
+      ) : (
+        <div
+          className="flex flex-col h-6 gap-1.5 cursor-pointer z-50"
+          onClick={() => setOpen((prev) => !prev)}
+        >
+          <div className="h-1 bg-text w-10 rounded-full"></div>
+          <div className="h-1 bg-text w-10 rounded-full"></div>
+          <div className="h-1 bg-text w-10 rounded-full"></div>
+        </div>
       )}
+
       {open && (
         <div className="w-[100vw] h-[100vh] fixed top-0 right-0 bg-headfoot flex flex-col text-2xl gap-8 justify-center items-center">
           {LINKS.map((link) => (
@@ -48,11 +52,17 @@ export default function MobileNavbar() {
               link={link}
             />
           ))}
-          {!session && (
+          {session ? (
+            <MobileLink
+              onClick={() => setOpen((prev) => !prev)}
+              key="/profile"
+              link={profileLink}
+            />
+          ) : (
             <MobileLink
               onClick={() => setOpen((prev) => !prev)}
               key="/login"
-              link={{ path: "/login", title: t("Login") }}
+              link={loginLink}
             />
           )}
           {session && (

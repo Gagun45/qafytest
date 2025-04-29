@@ -13,7 +13,8 @@
     "Application": "Заявка",
     "Login": "Вхід",
     "Logout": "Вийти",
-    "Contacts": "Contacts"
+    "Contacts": "Контакти",
+    "Profile": "Профіль"
   },
   "WhyUsPage": {
     "title": "Чому обирають нас?",

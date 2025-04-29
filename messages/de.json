@@ -13,7 +13,8 @@
     "Application": "Antrag",
     "Login": "Anmelden",
     "Logout": "Abmelden",
-    "Contacts": "Contacts"
+    "Contacts": "Kontakte",
+    "Profile": "Profil"
   },
   "WhyUsPage": {
     "title": "Warum uns wählen?",

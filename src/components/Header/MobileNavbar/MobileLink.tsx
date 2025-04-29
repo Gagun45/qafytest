@@ -2,13 +2,16 @@
 
 import { Link, usePathname } from "@/i18n/navigation";
 import type { LinkInterface } from "../Navbar/Navbar";
+import type { ReactNode } from "react";
 
 export default function MobileLink({
   link,
   onClick,
+  children,
 }: {
   link: LinkInterface;
   onClick: () => void;
+  children?: ReactNode;
 }) {
   const pathname = usePathname();
   const currentPage =
@@ -20,7 +23,7 @@ export default function MobileLink({
       href={link.path}
       className={`${currentPage && "bg-main"} navLink w-full rounded-none h-12`}
     >
-      {link.title}
+      {children ? children : link.title}
     </Link>
   );
 }

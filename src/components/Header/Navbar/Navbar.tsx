@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import NavLink from "./NavLink/NavLink";
 import Signin from "./Signin/Signin";
+import ProfileLink from "./ProfileLink/ProfileLink";
 
 export interface LinkInterface {
   title: string;
@@ -9,6 +10,7 @@ export interface LinkInterface {
 
 export default function Navbar() {
   const t = useTranslations("NavBarLinks");
+
   const LINKS: LinkInterface[] = [
     { title: t("Home"), path: "/" },
     { title: t("Services"), path: "/services" },
@@ -21,6 +23,7 @@ export default function Navbar() {
         <NavLink key={link.path} link={link} />
       ))}
       <Signin />
+      <ProfileLink />
     </div>
   );
 }
