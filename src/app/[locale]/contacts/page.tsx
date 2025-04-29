@@ -23,14 +23,14 @@ export default function ContactsPage() {
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
               <a
-                href="https://maps.app.goo.gl/QJ9aTANKbQAy4RjaA"
+                href="https://maps.app.goo.gl/oPaqjkQNkuh8KHMo8?g_st=atm"
                 target="_blank"
               >
                 <FaSearchLocation />
               </a>
               <h3>Waldstraße 37, 93161 Sinzing, Germany</h3>
             </div>
-            <a href="https://maps.app.goo.gl/QJ9aTANKbQAy4RjaA" target="_blank">
+            <a href="https://maps.app.goo.gl/oPaqjkQNkuh8KHMo8?g_st=atm" target="_blank">
               <i className="text-sm">View on Google Maps</i>
             </a>
           </div>
