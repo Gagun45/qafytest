@@ -1,4 +1,5 @@
 {
+  "leaveAnApplication": "Leave a request",
   "smthWentWrong": "Something went wrong",
   "HomePage": {
     "1stP": "Your reliable electronics repair service in Germany",
@@ -10,7 +11,7 @@
     "Home": "Home",
     "WhyUs": "Why us?",
     "Services": "Services",
-    "Application": "Application",
+    "Application": "Request",
     "Login": "Login",
     "Logout": "Logout",
     "Contacts": "Contacts",
@@ -22,7 +23,7 @@
     "2ndP": "Only tested spare parts - no fakes",
     "3rdP": "Clear prices - no hidden costs",
     "4thP": "Multilingual service - German, English & Ukrainian",
-    "5thP": "Online application and repair status tracking"
+    "5thP": "Online request and repair status tracking"
   },
   "LoginPage": {
     "email": "Email",
@@ -78,5 +79,40 @@
     "6th": "Battery replacement",
     "7th": "Software installation",
     "8th": "Game console repair (PS5, Xbox, Nintendo)"
+  },
+  "ApplicationForm": {
+    "overallSizeError": "Overall size of attached images is bigger ({overallSize}mb) than limit ({MAX_FILE_SIZE_MB}mb)",
+    "success": "Request has been successfully submitted. We will answer soon!",
+    "failed": "Something went wrong, request has NOT been submitted, try later",
+    "alreadyAdded": "Already added",
+    "validFile": "Please upload a valid image file",
+    "title": "Request",
+    "subtitle": "Create an request and we will contact you",
+    "howitworks": "How it works?",
+    "yourName": "Your Name",
+    "contacts": "Contacts",
+    "additionalContacts": "phone, telegram, whatsapp or any other",
+    "deviceType": "Device type",
+    "additionalDevice": "smartphone, laptop, PC, etc.",
+    "describe": "Describe the problem",
+    "imageAdded": "Image added",
+    "addAnImage": "Add an image",
+    "pending": "Submitting...",
+    "submit": "Submit"
+  },
+  "ContactsPage": {
+    "title": "Our contacts",
+    "subtitle": "You can only contact me via correspondence or in person",
+    "subtitle2": "No answer to calls",
+    "googleMaps": "View on map"
+  },
+  "HowItWorksPage": {
+    "title": "🧾 How it works?",
+    "headingRow": "Leave a request on the website",
+    "1stRow": "We will contact you to clarify the details",
+    "2ndRow": "Send the device or come in person",
+    "3rdRow": "We will diagnose and confirm the cost",
+    "4thRow": "After approval - we carry out the repair",
+    "5thRow": "Get the finished device and a guarantee"
   }
 }

@@ -7,8 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import TextAreaAutosize from "react-textarea-autosize";
 import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
-export const MAX_FILE_SIZE_MB = 8; //NEXT CONFIG TS VALUE
+export const MAX_FILE_SIZE_MB = 1; //NEXT CONFIG TS VALUE
 
 export type ImageType = {
   file: File;
@@ -16,6 +17,8 @@ export type ImageType = {
 };
 
 export default function ApplicationForm() {
+  const t = useTranslations("ApplicationForm");
+
   const [status, setStatus] = useState("");
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState("");
@@ -38,9 +41,10 @@ export default function ApplicationForm() {
     if (overallSize > MAX_FILE_SIZE_MB) {
       setIsDisabled(true);
       setError(
-        `Overall size of attached images is bigger (${overallSize.toPrecision(
-          2
-        )}mb) than limit (${MAX_FILE_SIZE_MB}mb)`
+        t("overallSizeError", {
+          overallSize: overallSize.toPrecision(2),
+          MAX_FILE_SIZE_MB,
+        })
       );
     } else {
       setIsDisabled(false);
@@ -54,10 +58,8 @@ export default function ApplicationForm() {
   const labelClass = "flex gap-2 relative";
   const labelTitle = "w-fit absolute -top-6";
 
-  const success =
-    "Application has been successfully submitted. We will answer soon!";
-  const failed =
-    "Something went wrong, application has NOT been submitted, try later";
+  const success = t('success');
+  const failed = t('failed');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -90,12 +92,12 @@ export default function ApplicationForm() {
     }
 
     if (files.some((item) => item.file.name === file.name)) {
-      setError("Already added");
+      setError(t('alreadyAdded'));
       return;
     }
 
     if (!file.type.startsWith("image/")) {
-      setError("Please upload a valid image file");
+      setError(t('validFile'));
       e.target.value = "";
       return;
     }
@@ -112,10 +114,10 @@ export default function ApplicationForm() {
   return (
     <section>
       <div className="mainHeading gap-2">
-        <h1 className="pageTitle">Application</h1>
-        <h2>Create an application and we will contact you</h2>
+        <h1 className="pageTitle">{t('title')}</h1>
+        <h2>{t('subtitle')}</h2>
         <h3 className="underline">
-          <Link href="/how">How it works?</Link>
+          <Link href="/how">{t('howitworks')}</Link>
         </h3>
         {status && (
           <span
@@ -127,27 +129,27 @@ export default function ApplicationForm() {
       </div>
       <form className={styles.form} onSubmit={handleSubmit} ref={formRef}>
         <label className={labelClass}>
-          <span className={labelTitle}>Your Name</span>
+          <span className={labelTitle}>{t('yourName')}</span>
           <input required type="text" name="name" />
         </label>
         <label className={labelClass}>
           <div className={labelTitle}>
-            Contacts{" "}
+            {t('contacts')}{" "}
             <span className="inline text-xs">
-              (phone, telegram, whatsapp or any other)
+              ({t('additionalContacts')})
             </span>
           </div>
           <input required type="text" name="contact" />
         </label>
         <label className={labelClass}>
           <div className={labelTitle}>
-            Device type{" "}
-            <span className="text-xs">(smartphone, laptop, PC, etc.)</span>
+            {t('deviceType')}{" "}
+            <span className="text-xs">({t('additionalDevice')})</span>
           </div>
           <input required type="text" name="device" />
         </label>
         <label className={labelClass}>
-          <span className={labelTitle}>Describe the problem</span>
+          <span className={labelTitle}>{t('describe')}</span>
           <TextAreaAutosize
             required
             name="description"
@@ -161,12 +163,12 @@ export default function ApplicationForm() {
             className="flex bg-headfoot py-1 px-2 rounded-sm w-36 justify-center cursor-pointer"
             onClick={() => inputFileRef.current?.click()}
           >
-            {files.length > 0 ? "Image added" : "Add an image"}
+            {files.length > 0 ? t('imageAdded') : t('addAnImage')}
           </button>
           {files && (
             <div className="flex flex-wrap gap-3">
               {files.map((image) => (
-                <div key={image.url} className="flex mt-2 flex-col gap-1">
+                <div key={image.url} className="flex mt-2 items-center flex-col gap-1">
                   <div className="flex items-center gap-2">
                     <span>{image.file.name}</span>
                     <FontAwesomeIcon
@@ -200,7 +202,7 @@ export default function ApplicationForm() {
           )}
         </div>
         <button disabled={isPending || isDisabled} className={styles.button}>
-          {isPending ? "Submitting..." : "Submit"}
+          {isPending ? t('pending') : t('submit')}
         </button>
       </form>
     </section>

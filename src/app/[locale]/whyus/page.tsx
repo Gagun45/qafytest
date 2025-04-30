@@ -42,7 +42,7 @@ export default function WhyUsPage() {
         <div className="mainHeading gap-0">
           <h1 className="pageTitle">{t("title")}</h1>
           <Link href={"/application"} className="underline">
-            (Залишити заявку)
+            ({useTranslations()('leaveAnApplication')})
           </Link>
         </div>
         <div className="heroDiv">

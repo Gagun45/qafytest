@@ -20,15 +20,14 @@ export default function ServicesPage() {
       <section>
         <div className="mainHeading gap-0">
           <h1 className="pageTitle">{t("title")}</h1>
-          <Link href={"/application"} className="underline">(Залишити заявку)</Link>
+          <Link href={"/application"} className="underline">
+            ({useTranslations()("leaveAnApplication")})
+          </Link>
         </div>
         <div className="heroDiv">
           {SERVICES.map((service) => (
             <div key={service} className="flex items-center gap-4">
-              <FontAwesomeIcon
-                icon={faArrowRight}
-                className="shrink-0"
-              />
+              <FontAwesomeIcon icon={faArrowRight} className="shrink-0" />
               <p>{service}</p>
             </div>
           ))}

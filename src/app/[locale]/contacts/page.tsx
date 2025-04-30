@@ -7,17 +7,19 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { useTranslations } from "next-intl";
 
 export default function ContactsPage() {
+  const t = useTranslations('ContactsPage')
   return (
     <main className={styles.main}>
       <section>
         <div className="mainHeading gap-1 text-center">
-          <h1 className="pageTitle">Наші контакти</h1>
+          <h1 className="pageTitle">{t('title')}</h1>
           <p>
-            Зв’язатись зі мною можна тільки через переписку або особисту зустріч
+            {t('subtitle')}
           </p>
-          <p className="font-semibold italic">На дзвінки не відповідаю</p>
+          <p className="font-semibold italic">{t('subtitle2')}</p>
         </div>
         <div className="heroDiv">
           <div className="flex flex-col">
@@ -28,10 +30,10 @@ export default function ContactsPage() {
               >
                 <FaSearchLocation />
               </a>
-              <h3>Waldstraße 37, 93161 Sinzing, Germany</h3>
+              <h3>Waldstraße 37, 93161 Sinzing, Deutschland</h3>
             </div>
             <a href="https://maps.app.goo.gl/oPaqjkQNkuh8KHMo8?g_st=atm" target="_blank">
-              <i className="text-sm">View on Google Maps</i>
+              <i className="text-sm">{t('googleMaps')}</i>
             </a>
           </div>
           <div className="flex gap-2">

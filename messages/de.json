@@ -1,4 +1,5 @@
 {
+  "leaveAnApplication": "Eine Bewerbung hinterlassen",
   "smthWentWrong": "Etwas ist schiefgelaufen",
   "HomePage": {
     "1stP": "Ihr zuverlässiger Elektronik-Reparaturservice in Deutschland",
@@ -78,5 +79,40 @@
     "6th": "Akkuwechsel",
     "7th": "Softwareinstallation",
     "8th": "Spielekonsolenreparatur (PS5, Xbox, Nintendo)"
+  },
+  "ApplicationForm": {
+    "overallSizeError": "Die Gesamtgröße der angehängten Bilder ist größer ({overallSize} MB) als das Limit ({MAX_FILE_SIZE_MB} MB)",
+    "success": "Bewerbung erfolgreich abgeschickt. Wir melden uns in Kürze!",
+    "failed": "Ein Fehler ist aufgetreten. Bewerbung wurde NICHT abgeschickt. Versuchen Sie es später erneut.",
+    "alreadyAdded": "Bereits hinzugefügt",
+    "validFile": "Bitte laden Sie eine gültige Bilddatei hoch.",
+    "title": "Bewerbung",
+    "subtitle": "Erstellen Sie eine Bewerbung, wir melden uns bei Ihnen.",
+    "howitworks": "Wie funktioniert es?",
+    "yourName": "Ihr Name",
+    "contacts": "Kontakte",
+    "additionalContacts": "Telefon, Telegram, WhatsApp oder ein anderes Gerät",
+    "deviceType": "Gerätetyp",
+    "additionalDevice": "Smartphone, Laptop, PC usw.",
+    "describe": "Problem beschreiben",
+    "imageAdded": "Bild hinzugefügt",
+    "addAnImage": "Bild hinzufügen",
+    "pending": "Wird gesendet...",
+    "submit": "Senden"
+  },
+  "ContactsPage": {
+    "title": "Unsere Kontakte",
+    "subtitle": "Sie erreichen mich nur schriftlich oder persönlich",
+    "subtitle2": "Keine Anrufe",
+    "googleMaps": "Auf der Karte anzeigen"
+  },
+  "HowItWorksPage": {
+    "title": "🧾 Wie funktioniert es?",
+    "headingRow": "Anfrage auf der Website hinterlassen",
+    "1stRow": "Wir kontaktieren Sie, um die Details zu klären",
+    "2ndRow": "Senden Sie das Gerät ein oder kommen Sie persönlich vorbei",
+    "3rdRow": "Wir diagnostizieren und bestätigen die Kosten",
+    "4thRow": "Nach der Genehmigung führen wir die Reparatur durch",
+    "5thRow": "Sie erhalten das fertige Gerät und eine Garantie"
   }
 }
