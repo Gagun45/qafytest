@@ -59,11 +59,11 @@
   }
 
   .heroDiv {
-    @apply flex text-lg sm:text-2xl flex-col gap-8 justify-evenly grow-1
+    @apply flex text-lg sm:text-2xl flex-col gap-8 justify-around grow-1
   }
 
   .navLink {
-    @apply rounded-full cursor-pointer h-6 flex items-center justify-center w-fit px-4 hover:bg-main;
+    @apply rounded-full cursor-pointer h-6 flex items-center justify-center lg:hover:text-main w-fit px-1 underline-offset-4 hover:bg-main lg:hover:bg-transparent;
   }
 
   .mainHeading {

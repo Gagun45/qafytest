@@ -15,7 +15,8 @@
     "Login": "Login",
     "Logout": "Logout",
     "Contacts": "Contacts",
-    "Profile": "Profile"
+    "Profile": "Profile",
+    "Prices": "Prices"
   },
   "WhyUsPage": {
     "title": "Why choose us?",
@@ -114,5 +115,17 @@
     "3rdRow": "We will diagnose and confirm the cost",
     "4thRow": "After approval - we carry out the repair",
     "5thRow": "Get the finished device and a guarantee"
+  },
+  "PricesPage": {
+    "1stRow": "Diagnostics — 0-15 €",
+    "2ndRow": "Display replacement (smartphone) — from 50 €",
+    "3rdRow": "Repair after flooding — from 60 €",
+    "4thRow": "Battery replacement — from 40 €",
+    "5thRow": "Laptop cleaning — 30-45 €",
+    "6thRow": "Flashing — from 25 €",
+    "clarify": "To clarify the price —",
+    "contactUs": "contact us",
+    "or": "or",
+    "leaveARequest": "leave a request"
   }
 }

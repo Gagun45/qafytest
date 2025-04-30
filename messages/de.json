@@ -1,5 +1,5 @@
 {
-  "leaveAnApplication": "Eine Bewerbung hinterlassen",
+  "leaveAnApplication": "Eine Anfrage hinterlassen",
   "smthWentWrong": "Etwas ist schiefgelaufen",
   "HomePage": {
     "1stP": "Ihr zuverlässiger Elektronik-Reparaturservice in Deutschland",
@@ -15,7 +15,8 @@
     "Login": "Anmelden",
     "Logout": "Abmelden",
     "Contacts": "Kontakte",
-    "Profile": "Profil"
+    "Profile": "Profil",
+    "Prices": "Preise"
   },
   "WhyUsPage": {
     "title": "Warum uns wählen?",
@@ -82,12 +83,12 @@
   },
   "ApplicationForm": {
     "overallSizeError": "Die Gesamtgröße der angehängten Bilder ist größer ({overallSize} MB) als das Limit ({MAX_FILE_SIZE_MB} MB)",
-    "success": "Bewerbung erfolgreich abgeschickt. Wir melden uns in Kürze!",
-    "failed": "Ein Fehler ist aufgetreten. Bewerbung wurde NICHT abgeschickt. Versuchen Sie es später erneut.",
+    "success": "Anfrage  erfolgreich abgeschickt. Wir melden uns in Kürze!",
+    "failed": "Ein Fehler ist aufgetreten. Anfrage  wurde NICHT abgeschickt. Versuchen Sie es später erneut.",
     "alreadyAdded": "Bereits hinzugefügt",
     "validFile": "Bitte laden Sie eine gültige Bilddatei hoch.",
-    "title": "Bewerbung",
-    "subtitle": "Erstellen Sie eine Bewerbung, wir melden uns bei Ihnen.",
+    "title": "Anfrage ",
+    "subtitle": "Erstellen Sie eine Anfrage , wir melden uns bei Ihnen.",
     "howitworks": "Wie funktioniert es?",
     "yourName": "Ihr Name",
     "contacts": "Kontakte",
@@ -114,5 +115,17 @@
     "3rdRow": "Wir diagnostizieren und bestätigen die Kosten",
     "4thRow": "Nach der Genehmigung führen wir die Reparatur durch",
     "5thRow": "Sie erhalten das fertige Gerät und eine Garantie"
+  },
+  "PricesPage": {
+    "1stRow": "Diagnose – 0–15 €",
+    "2ndRow": "Displayaustausch (Smartphone) – ab 50 €",
+    "3rdRow": "Reparatur nach Wasserschaden – ab 60 €",
+    "4thRow": "Akkuaustausch – ab 40 €",
+    "5thRow": "Laptop-Reinigung – 30–45 €",
+    "6thRow": "Flashen – ab 25 €",
+    "clarify": "Um den Preis zu klären —",
+    "contactUs": "kontaktieren Sie uns",
+    "or": "oder ",
+    "leaveARequest": "hinterlassen Sie eine Anfrage"
   }
 }

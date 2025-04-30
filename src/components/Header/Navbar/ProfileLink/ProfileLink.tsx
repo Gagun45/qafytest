@@ -16,7 +16,7 @@ export default function ProfileLink() {
   }
   return (
     <NavLink key={"/profile"} link={profileLink}>
-      <FontAwesomeIcon icon={faUser} />
+      <FontAwesomeIcon icon={faUser} className="hover:text-main"/>
     </NavLink>
   );
 }

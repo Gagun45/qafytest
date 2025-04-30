@@ -16,6 +16,7 @@ export default function Navbar() {
     { title: t("Services"), path: "/services" },
     { title: t("Application"), path: "/application" },
     { title: t("Contacts"), path: "/contacts" },
+    { title: t("Prices"), path: "/prices" },
   ];
   return (
     <div className="flex items-center gap-2 h-full">

@@ -1,5 +1,3 @@
-"use client";
-
 import { useTranslations } from "next-intl";
 import type { LinkInterface } from "../Navbar";
 import NavLink from "../NavLink/NavLink";

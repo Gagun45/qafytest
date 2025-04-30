@@ -22,6 +22,7 @@ export default function MobileNavbar() {
     { title: t("Services"), path: "/services" },
     { title: t("Application"), path: "/application" },
     { title: t("Contacts"), path: "/contacts" },
+    { title: t('Prices'), path: "/prices" },
   ];
 
   return (
@@ -44,7 +45,7 @@ export default function MobileNavbar() {
       )}
 
       {open && (
-        <div className="w-[100vw] h-[100vh] fixed top-0 right-0 bg-headfoot flex flex-col text-2xl gap-8 justify-center items-center">
+        <div className="w-[100vw] h-[100vh] fixed top-0 right-0 bg-headfoot flex flex-col text-2xl gap-6 justify-center items-center">
           {LINKS.map((link) => (
             <MobileLink
               onClick={() => setOpen((prev) => !prev)}

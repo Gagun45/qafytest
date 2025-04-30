@@ -58,8 +58,8 @@ export default function ApplicationForm() {
   const labelClass = "flex gap-2 relative";
   const labelTitle = "w-fit absolute -top-6";
 
-  const success = t('success');
-  const failed = t('failed');
+  const success = t("success");
+  const failed = t("failed");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -92,12 +92,12 @@ export default function ApplicationForm() {
     }
 
     if (files.some((item) => item.file.name === file.name)) {
-      setError(t('alreadyAdded'));
+      setError(t("alreadyAdded"));
       return;
     }
 
     if (!file.type.startsWith("image/")) {
-      setError(t('validFile'));
+      setError(t("validFile"));
       e.target.value = "";
       return;
     }
@@ -114,10 +114,10 @@ export default function ApplicationForm() {
   return (
     <section>
       <div className="mainHeading gap-2">
-        <h1 className="pageTitle">{t('title')}</h1>
-        <h2>{t('subtitle')}</h2>
+        <h1 className="pageTitle">{t("title")}</h1>
+        <h2>{t("subtitle")}</h2>
         <h3 className="underline">
-          <Link href="/how">{t('howitworks')}</Link>
+          <Link href="/how">{t("howitworks")}</Link>
         </h3>
         {status && (
           <span
@@ -129,27 +129,32 @@ export default function ApplicationForm() {
       </div>
       <form className={styles.form} onSubmit={handleSubmit} ref={formRef}>
         <label className={labelClass}>
-          <span className={labelTitle}>{t('yourName')}</span>
+          <span className={labelTitle}>
+            {t("yourName")}
+            <span style={{ color: "red" }}>*</span>
+          </span>
           <input required type="text" name="name" />
         </label>
         <label className={labelClass}>
           <div className={labelTitle}>
-            {t('contacts')}{" "}
-            <span className="inline text-xs">
-              ({t('additionalContacts')})
-            </span>
+            {t("contacts")}{" "}
+            <span className="inline text-xs">({t("additionalContacts")})</span>
+            <span style={{ color: "red" }}>*</span>
           </div>
           <input required type="text" name="contact" />
         </label>
         <label className={labelClass}>
           <div className={labelTitle}>
-            {t('deviceType')}{" "}
-            <span className="text-xs">({t('additionalDevice')})</span>
+            {t("deviceType")}{" "}
+            <span className="text-xs">({t("additionalDevice")})</span>
+            <span style={{ color: "red" }}>*</span>
           </div>
           <input required type="text" name="device" />
         </label>
         <label className={labelClass}>
-          <span className={labelTitle}>{t('describe')}</span>
+          <span className={labelTitle}>
+            {t("describe")} <span style={{ color: "red" }}>*</span>
+          </span>
           <TextAreaAutosize
             required
             name="description"
@@ -163,12 +168,15 @@ export default function ApplicationForm() {
             className="flex bg-headfoot py-1 px-2 rounded-sm w-36 justify-center cursor-pointer"
             onClick={() => inputFileRef.current?.click()}
           >
-            {files.length > 0 ? t('imageAdded') : t('addAnImage')}
+            {t("addAnImage")}
           </button>
           {files && (
             <div className="flex flex-wrap gap-3">
               {files.map((image) => (
-                <div key={image.url} className="flex mt-2 items-center flex-col gap-1">
+                <div
+                  key={image.url}
+                  className="flex mt-2 items-center flex-col gap-1"
+                >
                   <div className="flex items-center gap-2">
                     <span>{image.file.name}</span>
                     <FontAwesomeIcon
@@ -202,7 +210,7 @@ export default function ApplicationForm() {
           )}
         </div>
         <button disabled={isPending || isDisabled} className={styles.button}>
-          {isPending ? t('pending') : t('submit')}
+          {isPending ? t("pending") : t("submit")}
         </button>
       </form>
     </section>
