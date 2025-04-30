@@ -67,7 +67,7 @@
   }
 
   .mainHeading {
-    @apply flex flex-col justify-center items-center gap-4
+    @apply flex flex-col justify-center items-center text-center
   }
 
   .pageTitle {

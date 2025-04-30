@@ -113,7 +113,7 @@ export default function ApplicationForm() {
 
   return (
     <section>
-      <div className="mainHeading gap-2">
+      <div className="mainHeading">
         <h1 className="pageTitle">{t("title")}</h1>
         <h2>{t("subtitle")}</h2>
         <h3 className="underline">

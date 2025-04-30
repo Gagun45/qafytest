@@ -14,7 +14,7 @@ export default function ContactsPage() {
   return (
     <main className={styles.main}>
       <section>
-        <div className="mainHeading gap-1 text-center">
+        <div className="mainHeading">
           <h1 className="pageTitle">{t('title')}</h1>
           <p>
             {t('subtitle')}

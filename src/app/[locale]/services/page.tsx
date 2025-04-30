@@ -18,7 +18,7 @@ export default function ServicesPage() {
   return (
     <main>
       <section>
-        <div className="mainHeading gap-0">
+        <div className="mainHeading">
           <h1 className="pageTitle">{t("title")}</h1>
           <Link href={"/application"} className="underline">
             ({useTranslations()("leaveAnApplication")})
