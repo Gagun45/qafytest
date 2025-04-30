@@ -9,7 +9,7 @@ import TextAreaAutosize from "react-textarea-autosize";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 
-export const MAX_FILE_SIZE_MB = 1; //NEXT CONFIG TS VALUE
+export const MAX_FILE_SIZE_MB = 8; //NEXT CONFIG TS VALUE
 
 export type ImageType = {
   file: File;
